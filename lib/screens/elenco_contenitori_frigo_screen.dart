@@ -171,7 +171,7 @@ class ElencoContenitoriFrigoScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(appLoc.gen_Confirm_Delete_Title),
-        content: Text(appLoc.gen_Confirm_Delete_Message(nome ?? 'Senza nome')),
+        content: Text(appLoc.gen_Confirm_Delete_Message(nome ?? appLoc.no_name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
