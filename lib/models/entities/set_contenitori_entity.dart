@@ -12,7 +12,8 @@ class SetContenitoriEntity {
   /// Display name of the container set (e.g. "Blue Tupperware")
   String nome;
 
-  /// File system path to the container's photo
+  /// Path of the container's photo, relative to the app documents directory
+  /// (see `ImmaginiService`). Older versions stored an absolute path.
   String pathImmagine;
 
   /// Tare weight of the container in grams

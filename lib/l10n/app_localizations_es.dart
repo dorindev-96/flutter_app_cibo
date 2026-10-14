@@ -199,4 +199,77 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'No hay contenedores preestablecidos.\nAñádelos desde la pestaña Contenedores.';
+
+  @override
+  String get settings_theme_system => 'Sistema';
+
+  @override
+  String get settings_theme_light => 'Claro';
+
+  @override
+  String get settings_theme_dark => 'Oscuro';
+
+  @override
+  String get settings_freshness_fridge => 'Duración en nevera';
+
+  @override
+  String get settings_freshness_freezer => 'Duración en congelador';
+
+  @override
+  String get settings_freshness_note =>
+      'La etiqueta junto a cada plato se vuelve naranja cuando conviene consumirlo pronto y roja cuando supera la duración configurada.';
+
+  @override
+  String get settings_freshness_days_label => 'Días';
+
+  @override
+  String get gen_Save => 'Guardar';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days días',
+      one: '1 día',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Hace $days días',
+      one: 'Ayer',
+      zero: 'Hoy',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Fresco';
+
+  @override
+  String get freshnessExpiring => 'Consumir pronto';
+
+  @override
+  String get freshnessExpired => 'Caducado';
+
+  @override
+  String get containerDetailStorageLabel => 'Conservación';
+
+  @override
+  String get storageFridge => 'Nevera';
+
+  @override
+  String get storageFreezer => 'Congelador';
+
+  @override
+  String get containerDetailDateLabel => 'Fecha de Carga';
+
+  @override
+  String get help_freshness =>
+      'Junto al nombre de cada plato, una etiqueta indica cuántos días lleva guardado: verde si está fresco, naranja si conviene consumirlo pronto, roja si ha superado la duración configurada en Configuración, distinta para nevera y congelador.';
 }

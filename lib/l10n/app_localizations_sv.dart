@@ -195,4 +195,77 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'Inga förinställda behållare sparade.\nLägg till dem från fliken Behållare.';
+
+  @override
+  String get settings_theme_system => 'System';
+
+  @override
+  String get settings_theme_light => 'Ljust';
+
+  @override
+  String get settings_theme_dark => 'Mörkt';
+
+  @override
+  String get settings_freshness_fridge => 'Hållbarhet i kylskåp';
+
+  @override
+  String get settings_freshness_freezer => 'Hållbarhet i frys';
+
+  @override
+  String get settings_freshness_note =>
+      'Märket bredvid varje rätt blir orange när den bör ätas snart och rött när den har passerat den inställda hållbarheten.';
+
+  @override
+  String get settings_freshness_days_label => 'Dagar';
+
+  @override
+  String get gen_Save => 'Spara';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dagar',
+      one: '1 dag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'För $days dagar sedan',
+      one: 'Igår',
+      zero: 'Idag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Färsk';
+
+  @override
+  String get freshnessExpiring => 'Ät snart';
+
+  @override
+  String get freshnessExpired => 'Utgången';
+
+  @override
+  String get containerDetailStorageLabel => 'Förvaring';
+
+  @override
+  String get storageFridge => 'Kylskåp';
+
+  @override
+  String get storageFreezer => 'Frys';
+
+  @override
+  String get containerDetailDateLabel => 'Uppladdningsdatum';
+
+  @override
+  String get help_freshness =>
+      'Bredvid namnet på varje rätt visar ett märke hur många dagar den har förvarats: grönt om den är färsk, orange om den bör ätas snart, rött om den har passerat hållbarheten som ställts in under Inställningar, olika för kylskåp och frys.';
 }

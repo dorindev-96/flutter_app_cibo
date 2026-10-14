@@ -256,5 +256,87 @@
     "presetPickerEmpty": "Nessun contenitore preimpostato.\nAggiungili dalla scheda Contenitori.",
     "@presetPickerEmpty": {
         "description": "Message when no presets are available in the picker"
+    },
+    "settings_theme_system": "Sistema",
+    "@settings_theme_system": {
+        "description": "Theme option that follows the system setting"
+    },
+    "settings_theme_light": "Chiaro",
+    "@settings_theme_light": {
+        "description": "Theme option for the light theme"
+    },
+    "settings_theme_dark": "Scuro",
+    "@settings_theme_dark": {
+        "description": "Theme option for the dark theme"
+    },
+    "settings_freshness_fridge": "Durata in frigo",
+    "@settings_freshness_fridge": {
+        "description": "Label for the setting of how many days food keeps in the fridge"
+    },
+    "settings_freshness_freezer": "Durata in freezer",
+    "@settings_freshness_freezer": {
+        "description": "Label for the setting of how many days food keeps in the freezer"
+    },
+    "settings_freshness_note": "Il bollino accanto a ogni pietanza diventa arancione quando va consumata presto e rosso quando supera la durata impostata.",
+    "@settings_freshness_note": {
+        "description": "Explanation of the freshness badge shown below the freshness settings"
+    },
+    "settings_freshness_days_label": "Giorni",
+    "@settings_freshness_days_label": {
+        "description": "Label for the number of days field in the shelf life dialog"
+    },
+    "gen_Save": "Salva",
+    "@gen_Save": {
+        "description": "Save button label"
+    },
+    "freshnessDays": "{days, plural, =1{1 giorno} other{{days} giorni}}",
+    "@freshnessDays": {
+        "description": "Number of days of shelf life",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "freshnessAge": "{days, plural, =0{Oggi} =1{Ieri} other{{days} giorni fa}}",
+    "@freshnessAge": {
+        "description": "How long ago the food was stored, shown in the freshness badge",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "freshnessFresh": "Fresco",
+    "@freshnessFresh": {
+        "description": "Freshness status: the food is fresh"
+    },
+    "freshnessExpiring": "Da consumare presto",
+    "@freshnessExpiring": {
+        "description": "Freshness status: the food should be eaten soon"
+    },
+    "freshnessExpired": "Scaduto",
+    "@freshnessExpired": {
+        "description": "Freshness status: the food is past its shelf life"
+    },
+    "containerDetailStorageLabel": "Conservazione",
+    "@containerDetailStorageLabel": {
+        "description": "Label for the storage (fridge or freezer) selector in the container detail page"
+    },
+    "storageFridge": "Frigo",
+    "@storageFridge": {
+        "description": "Storage option: fridge"
+    },
+    "storageFreezer": "Freezer",
+    "@storageFreezer": {
+        "description": "Storage option: freezer"
+    },
+    "containerDetailDateLabel": "Data Caricamento",
+    "@containerDetailDateLabel": {
+        "description": "Label for the upload date field in the container detail page"
+    },
+    "help_freshness": "Accanto al nome di ogni pietanza un bollino indica da quanti giorni è conservata: verde se è fresca, arancione se va consumata presto, rosso se ha superato la durata impostata nelle Impostazioni, diversa per frigo e freezer.",
+    "@help_freshness": {
+        "description": "Help text explaining the freshness badge"
     }
 }

@@ -57,6 +57,12 @@ abstract final class LightColors {
 
   /// Color for content on error
   static const Color onError = Color(0xFFFFFFFF);
+
+  /// Freshness badge color for fresh food
+  static const Color fresh = Color(0xFF2E7D32);
+
+  /// Freshness badge color for food to be eaten soon
+  static const Color expiring = Color(0xFFB45309);
 }
 
 /// Dark theme color palette
@@ -111,4 +117,10 @@ abstract final class DarkColors {
 
   /// Color for content on error
   static const Color onError = Color(0xFF601410);
+
+  /// Freshness badge color for fresh food
+  static const Color fresh = Color(0xFF81C784);
+
+  /// Freshness badge color for food to be eaten soon
+  static const Color expiring = Color(0xFFFBBF24);
 }

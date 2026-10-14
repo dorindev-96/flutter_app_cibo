@@ -447,6 +447,114 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Nessun contenitore preimpostato.\nAggiungili dalla scheda Contenitori.'**
   String get presetPickerEmpty;
+
+  /// Theme option that follows the system setting
+  ///
+  /// In it, this message translates to:
+  /// **'Sistema'**
+  String get settings_theme_system;
+
+  /// Theme option for the light theme
+  ///
+  /// In it, this message translates to:
+  /// **'Chiaro'**
+  String get settings_theme_light;
+
+  /// Theme option for the dark theme
+  ///
+  /// In it, this message translates to:
+  /// **'Scuro'**
+  String get settings_theme_dark;
+
+  /// Label for the setting of how many days food keeps in the fridge
+  ///
+  /// In it, this message translates to:
+  /// **'Durata in frigo'**
+  String get settings_freshness_fridge;
+
+  /// Label for the setting of how many days food keeps in the freezer
+  ///
+  /// In it, this message translates to:
+  /// **'Durata in freezer'**
+  String get settings_freshness_freezer;
+
+  /// Explanation of the freshness badge shown below the freshness settings
+  ///
+  /// In it, this message translates to:
+  /// **'Il bollino accanto a ogni pietanza diventa arancione quando va consumata presto e rosso quando supera la durata impostata.'**
+  String get settings_freshness_note;
+
+  /// Label for the number of days field in the shelf life dialog
+  ///
+  /// In it, this message translates to:
+  /// **'Giorni'**
+  String get settings_freshness_days_label;
+
+  /// Save button label
+  ///
+  /// In it, this message translates to:
+  /// **'Salva'**
+  String get gen_Save;
+
+  /// Number of days of shelf life
+  ///
+  /// In it, this message translates to:
+  /// **'{days, plural, =1{1 giorno} other{{days} giorni}}'**
+  String freshnessDays(int days);
+
+  /// How long ago the food was stored, shown in the freshness badge
+  ///
+  /// In it, this message translates to:
+  /// **'{days, plural, =0{Oggi} =1{Ieri} other{{days} giorni fa}}'**
+  String freshnessAge(int days);
+
+  /// Freshness status: the food is fresh
+  ///
+  /// In it, this message translates to:
+  /// **'Fresco'**
+  String get freshnessFresh;
+
+  /// Freshness status: the food should be eaten soon
+  ///
+  /// In it, this message translates to:
+  /// **'Da consumare presto'**
+  String get freshnessExpiring;
+
+  /// Freshness status: the food is past its shelf life
+  ///
+  /// In it, this message translates to:
+  /// **'Scaduto'**
+  String get freshnessExpired;
+
+  /// Label for the storage (fridge or freezer) selector in the container detail page
+  ///
+  /// In it, this message translates to:
+  /// **'Conservazione'**
+  String get containerDetailStorageLabel;
+
+  /// Storage option: fridge
+  ///
+  /// In it, this message translates to:
+  /// **'Frigo'**
+  String get storageFridge;
+
+  /// Storage option: freezer
+  ///
+  /// In it, this message translates to:
+  /// **'Freezer'**
+  String get storageFreezer;
+
+  /// Label for the upload date field in the container detail page
+  ///
+  /// In it, this message translates to:
+  /// **'Data Caricamento'**
+  String get containerDetailDateLabel;
+
+  /// Help text explaining the freshness badge
+  ///
+  /// In it, this message translates to:
+  /// **'Accanto al nome di ogni pietanza un bollino indica da quanti giorni è conservata: verde se è fresca, arancione se va consumata presto, rosso se ha superato la durata impostata nelle Impostazioni, diversa per frigo e freezer.'**
+  String get help_freshness;
 }
 
 class _AppLocalizationsDelegate

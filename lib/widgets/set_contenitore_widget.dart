@@ -1,9 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../l10n/app_localizations.dart';
+import '../main.dart';
+import '../utils/formato.dart';
 
 /// A widget displaying a single container set item in a list.
 ///
@@ -30,9 +30,7 @@ class SetContenitoreWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appLoc = AppLocalizations.of(context)!;
-    final weightText = pesoInGrammi == pesoInGrammi.roundToDouble()
-        ? pesoInGrammi.round().toString()
-        : pesoInGrammi.toStringAsFixed(2);
+    final weightText = formattaNumero(pesoInGrammi, appLoc.localeName);
 
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
@@ -81,9 +79,10 @@ class SetContenitoreWidget extends StatelessWidget {
 
   /// Builds the image widget from file path, falling back to a placeholder.
   Widget _buildImage(ThemeData theme) {
-    if (pathImmagine.isNotEmpty && File(pathImmagine).existsSync()) {
+    final file = immaginiService.risolvi(pathImmagine);
+    if (file != null) {
       return Image.file(
-        File(pathImmagine),
+        file,
         fit: BoxFit.cover,
         errorBuilder: (_, __, ___) => _placeholder(theme),
       );

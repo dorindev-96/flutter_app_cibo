@@ -200,4 +200,77 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'Aucun conteneur préenregistré.\nAjoutez-les depuis l\'onglet Conteneurs.';
+
+  @override
+  String get settings_theme_system => 'Système';
+
+  @override
+  String get settings_theme_light => 'Clair';
+
+  @override
+  String get settings_theme_dark => 'Sombre';
+
+  @override
+  String get settings_freshness_fridge => 'Durée au réfrigérateur';
+
+  @override
+  String get settings_freshness_freezer => 'Durée au congélateur';
+
+  @override
+  String get settings_freshness_note =>
+      'La pastille à côté de chaque plat devient orange lorsqu\'il faut le consommer bientôt et rouge lorsqu\'il dépasse la durée définie.';
+
+  @override
+  String get settings_freshness_days_label => 'Jours';
+
+  @override
+  String get gen_Save => 'Enregistrer';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days jours',
+      one: '1 jour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Il y a $days jours',
+      one: 'Hier',
+      zero: 'Aujourd\'hui',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Frais';
+
+  @override
+  String get freshnessExpiring => 'À consommer bientôt';
+
+  @override
+  String get freshnessExpired => 'Périmé';
+
+  @override
+  String get containerDetailStorageLabel => 'Conservation';
+
+  @override
+  String get storageFridge => 'Réfrigérateur';
+
+  @override
+  String get storageFreezer => 'Congélateur';
+
+  @override
+  String get containerDetailDateLabel => 'Date de Téléchargement';
+
+  @override
+  String get help_freshness =>
+      'À côté du nom de chaque plat, une pastille indique depuis combien de jours il est conservé : verte s\'il est frais, orange s\'il faut le consommer bientôt, rouge s\'il a dépassé la durée définie dans les Paramètres, différente pour le réfrigérateur et le congélateur.';
 }

@@ -16,4 +16,7 @@ class ContenitoreEntity {
   double? pesoPorzione;
   @Property(type: PropertyType.date)
   DateTime? dataCaricamento;
+
+  /// Whether the food is stored in the freezer instead of the fridge.
+  bool nelFreezer = false;
 }

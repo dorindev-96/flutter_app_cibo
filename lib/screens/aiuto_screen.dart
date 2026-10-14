@@ -162,6 +162,9 @@ class AiutoScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 16.h),
+            // Freshness badge
+            Text(l10n.help_freshness, style: textStyle),
             SizedBox(height: 28.h),
             // Thanks
             Center(

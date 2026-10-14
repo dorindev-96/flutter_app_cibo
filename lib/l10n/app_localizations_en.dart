@@ -198,4 +198,77 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'No container presets saved yet.\nAdd them from the Containers tab.';
+
+  @override
+  String get settings_theme_system => 'System';
+
+  @override
+  String get settings_theme_light => 'Light';
+
+  @override
+  String get settings_theme_dark => 'Dark';
+
+  @override
+  String get settings_freshness_fridge => 'Fridge shelf life';
+
+  @override
+  String get settings_freshness_freezer => 'Freezer shelf life';
+
+  @override
+  String get settings_freshness_note =>
+      'The badge next to each dish turns orange when it should be eaten soon and red once it is past the shelf life you set.';
+
+  @override
+  String get settings_freshness_days_label => 'Days';
+
+  @override
+  String get gen_Save => 'Save';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days ago',
+      one: 'Yesterday',
+      zero: 'Today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Fresh';
+
+  @override
+  String get freshnessExpiring => 'Eat soon';
+
+  @override
+  String get freshnessExpired => 'Expired';
+
+  @override
+  String get containerDetailStorageLabel => 'Storage';
+
+  @override
+  String get storageFridge => 'Fridge';
+
+  @override
+  String get storageFreezer => 'Freezer';
+
+  @override
+  String get containerDetailDateLabel => 'Upload Date';
+
+  @override
+  String get help_freshness =>
+      'Next to the name of each dish, a badge shows how many days it has been stored: green when it is fresh, orange when it should be eaten soon, red once it is past the shelf life set in Settings, which differs between fridge and freezer.';
 }

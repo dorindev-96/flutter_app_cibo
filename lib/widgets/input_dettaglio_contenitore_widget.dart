@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// A widget that displays a labeled input field for container details.
@@ -11,15 +12,27 @@ class InputDettaglioContenitoreWidget extends StatefulWidget {
     required this.label,
     required this.controller,
     this.keyboardType = TextInputType.text,
+    this.inputFormatters,
     this.suffixIcon,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String label;
   final TextEditingController controller;
   final TextInputType keyboardType;
 
+  /// Optional formatters restricting what the user can type.
+  final List<TextInputFormatter>? inputFormatters;
+
   /// Optional icon widget displayed at the end of the text field.
   final Widget? suffixIcon;
+
+  /// Whether the text can only be changed through [onTap] (e.g. a picker).
+  final bool readOnly;
+
+  /// Optional callback invoked when the field is tapped.
+  final VoidCallback? onTap;
 
   @override
   State<InputDettaglioContenitoreWidget> createState() =>
@@ -49,6 +62,9 @@ class _InputDettaglioContenitoreWidgetState
             key: widget.key,
             controller: widget.controller,
             keyboardType: widget.keyboardType,
+            inputFormatters: widget.inputFormatters,
+            readOnly: widget.readOnly,
+            onTap: widget.onTap,
             decoration: InputDecoration(suffixIcon: widget.suffixIcon),
           ),
         ],

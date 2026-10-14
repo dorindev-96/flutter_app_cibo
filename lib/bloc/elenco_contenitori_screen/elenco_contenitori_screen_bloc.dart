@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../main.dart';
 import '../../models/entities/set_contenitori_entity.dart';
 import '../../repositories/set_contenitori_repository.dart';
 
@@ -40,9 +41,11 @@ class ElencoContenitoriScreenBloc
     Emitter<ElencoContenitoriScreenState> emit,
   ) async {
     try {
+      // The picked photo lives in a temporary folder: keep a persistent copy.
+      final pathImmagine = await immaginiService.salva(event.pathImmagine);
       final entity = SetContenitoriEntity(
         nome: event.nome,
-        pathImmagine: event.pathImmagine,
+        pathImmagine: pathImmagine,
         pesoInGrammi: event.pesoInGrammi,
       );
       _repository.add(entity);
@@ -57,7 +60,9 @@ class ElencoContenitoriScreenBloc
     Emitter<ElencoContenitoriScreenState> emit,
   ) async {
     try {
+      final entity = _repository.get(event.id);
       _repository.delete(event.id);
+      if (entity != null) await immaginiService.elimina(entity.pathImmagine);
       add(LoadSetContenitoriEvent());
     } catch (e) {
       emit(ElencoContenitoriScreenError(e.toString()));

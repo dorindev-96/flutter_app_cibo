@@ -38,8 +38,9 @@ Quante volte hai preparato più porzioni per i prossimi giorni e poi, davanti al
 - 📦 Registra i piatti che hai in frigo (nome, peso del contenitore, peso totale, peso porzione)
 - 🧮 Calcolo automatico delle porzioni disponibili e dei grammi da prelevare
 - 🔁 Aggiorna il peso totale nel tempo (per essere super precisi)
+- 🟢 Indicatore di freschezza: da quanti giorni è conservato ogni piatto, con durata personalizzabile per frigo e freezer
 - 📴 Funziona completamente offline
-- 🎨 Supporto tema chiaro/scuro
+- 🎨 Tema chiaro, scuro o di sistema
 - 🌐 Localizzazione multi-lingua (Italiano, English, Español, Français, Deutsch, Svenska)
 - 🧑‍🍳 Interfaccia semplice e pensata per uso quotidiano
 
@@ -113,6 +114,7 @@ lib/
 ├── screens/                 # Schermate dell'app
 ├── services/                # Funzionalità di servizio
 ├── theme/                   # File dei temi
+├── utils/                   # Funzioni di utilità (formattazione di numeri e date)
 ├── widgets/                 # Widget riutilizzabili
 └── main.dart                # Punto di ingresso
 ```

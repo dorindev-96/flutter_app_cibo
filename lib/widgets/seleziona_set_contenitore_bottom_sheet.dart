@@ -1,11 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../l10n/app_localizations.dart';
+import '../main.dart';
 import '../models/entities/set_contenitori_entity.dart';
 import '../repositories/set_contenitori_repository.dart';
+import '../utils/formato.dart';
 
 /// A bottom sheet that displays saved container presets for selection.
 ///
@@ -127,10 +127,7 @@ class _PresetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appLoc = AppLocalizations.of(context)!;
-    final weightText =
-        preset.pesoInGrammi == preset.pesoInGrammi.roundToDouble()
-        ? preset.pesoInGrammi.round().toString()
-        : preset.pesoInGrammi.toStringAsFixed(2);
+    final weightText = formattaNumero(preset.pesoInGrammi, appLoc.localeName);
 
     return Card(
       margin: EdgeInsets.zero,
@@ -160,10 +157,10 @@ class _PresetTile extends StatelessWidget {
   }
 
   Widget _buildImage(ThemeData theme) {
-    if (preset.pathImmagine.isNotEmpty &&
-        File(preset.pathImmagine).existsSync()) {
+    final file = immaginiService.risolvi(preset.pathImmagine);
+    if (file != null) {
       return Image.file(
-        File(preset.pathImmagine),
+        file,
         fit: BoxFit.cover,
         errorBuilder: (_, __, ___) => _placeholder(theme),
       );

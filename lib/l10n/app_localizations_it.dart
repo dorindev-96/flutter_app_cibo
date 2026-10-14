@@ -198,4 +198,77 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'Nessun contenitore preimpostato.\nAggiungili dalla scheda Contenitori.';
+
+  @override
+  String get settings_theme_system => 'Sistema';
+
+  @override
+  String get settings_theme_light => 'Chiaro';
+
+  @override
+  String get settings_theme_dark => 'Scuro';
+
+  @override
+  String get settings_freshness_fridge => 'Durata in frigo';
+
+  @override
+  String get settings_freshness_freezer => 'Durata in freezer';
+
+  @override
+  String get settings_freshness_note =>
+      'Il bollino accanto a ogni pietanza diventa arancione quando va consumata presto e rosso quando supera la durata impostata.';
+
+  @override
+  String get settings_freshness_days_label => 'Giorni';
+
+  @override
+  String get gen_Save => 'Salva';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days giorni',
+      one: '1 giorno',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days giorni fa',
+      one: 'Ieri',
+      zero: 'Oggi',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Fresco';
+
+  @override
+  String get freshnessExpiring => 'Da consumare presto';
+
+  @override
+  String get freshnessExpired => 'Scaduto';
+
+  @override
+  String get containerDetailStorageLabel => 'Conservazione';
+
+  @override
+  String get storageFridge => 'Frigo';
+
+  @override
+  String get storageFreezer => 'Freezer';
+
+  @override
+  String get containerDetailDateLabel => 'Data Caricamento';
+
+  @override
+  String get help_freshness =>
+      'Accanto al nome di ogni pietanza un bollino indica da quanti giorni è conservata: verde se è fresca, arancione se va consumata presto, rosso se ha superato la durata impostata nelle Impostazioni, diversa per frigo e freezer.';
 }

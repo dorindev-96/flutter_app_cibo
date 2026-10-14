@@ -201,4 +201,77 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'Noch keine Behälter-Vorlagen gespeichert.\nFüge sie über den Behälter-Tab hinzu.';
+
+  @override
+  String get settings_theme_system => 'System';
+
+  @override
+  String get settings_theme_light => 'Hell';
+
+  @override
+  String get settings_theme_dark => 'Dunkel';
+
+  @override
+  String get settings_freshness_fridge => 'Haltbarkeit im Kühlschrank';
+
+  @override
+  String get settings_freshness_freezer => 'Haltbarkeit im Gefrierschrank';
+
+  @override
+  String get settings_freshness_note =>
+      'Die Markierung neben jedem Gericht wird orange, wenn es bald gegessen werden sollte, und rot, wenn die eingestellte Haltbarkeit überschritten ist.';
+
+  @override
+  String get settings_freshness_days_label => 'Tage';
+
+  @override
+  String get gen_Save => 'Speichern';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days Tage',
+      one: '1 Tag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Vor $days Tagen',
+      one: 'Gestern',
+      zero: 'Heute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Frisch';
+
+  @override
+  String get freshnessExpiring => 'Bald essen';
+
+  @override
+  String get freshnessExpired => 'Abgelaufen';
+
+  @override
+  String get containerDetailStorageLabel => 'Aufbewahrung';
+
+  @override
+  String get storageFridge => 'Kühlschrank';
+
+  @override
+  String get storageFreezer => 'Gefrierschrank';
+
+  @override
+  String get containerDetailDateLabel => 'Uploaddatum';
+
+  @override
+  String get help_freshness =>
+      'Neben dem Namen jedes Gerichts zeigt eine Markierung, seit wie vielen Tagen es aufbewahrt wird: grün, wenn es frisch ist, orange, wenn es bald gegessen werden sollte, rot, wenn die in den Einstellungen festgelegte Haltbarkeit überschritten ist – unterschiedlich für Kühlschrank und Gefrierschrank.';
 }
