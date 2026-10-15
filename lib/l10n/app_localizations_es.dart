@@ -94,59 +94,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get help_intro => 'Veamos cómo utilizar Cibo de la mejor manera.';
 
   @override
-  String get help_step1 => 'Empezamos introduciendo el nombre del plato';
-
-  @override
-  String get help_step2 =>
-      'e inmediatamente podemos introducir el peso del contenedor';
-
-  @override
-  String get help_step2_note => ', con la tapa si corresponde.';
-
-  @override
-  String get help_step3 =>
-      'En este punto, si aún no tenemos todo listo, podemos guardar';
-
-  @override
-  String get help_step3_note =>
-      'y continuar una vez que hayamos preparado el plato.';
-
-  @override
-  String get help_step4 =>
-      'Una vez que todo esté listo, llenamos el contenedor y lo pesamos, con la tapa si corresponde, e introducimos su peso total';
-
-  @override
-  String get help_step5 => 'veremos que';
-
-  @override
-  String get help_step5_note => 'se calcula automáticamente y al cambiar';
-
-  @override
-  String get help_step5_end => 'se actualizará en consecuencia.';
-
-  @override
-  String get help_step6 =>
-      'En este punto podemos elegir introducir el número de porciones';
-
-  @override
-  String get help_step6_note => 'o el peso de una sola porción';
-
-  @override
-  String get help_step6_end =>
-      ', al introducir una, la otra se actualizará automáticamente.';
-
-  @override
-  String get help_step7 => 'Ahora podemos guardar todo usando el botón guardar';
-
-  @override
-  String get help_gnam =>
-      'Cuando comemos, en lugar de cambiar los valores manualmente podemos usar el botón Gnam';
-
-  @override
-  String get help_gnam_note =>
-      'que eliminará una porción del contenedor y actualizará todos los datos.';
-
-  @override
   String get help_thanks => 'Gracias por descargar Cibo.';
 
   @override
@@ -199,4 +146,138 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'No hay contenedores preestablecidos.\nAñádelos desde la pestaña Contenedores.';
+
+  @override
+  String get settings_theme_system => 'Sistema';
+
+  @override
+  String get settings_theme_light => 'Claro';
+
+  @override
+  String get settings_theme_dark => 'Oscuro';
+
+  @override
+  String get settings_freshness_fridge => 'Duración en nevera';
+
+  @override
+  String get settings_freshness_freezer => 'Duración en congelador';
+
+  @override
+  String get settings_freshness_note =>
+      'La etiqueta junto a cada plato se vuelve naranja cuando conviene consumirlo pronto y roja cuando supera la duración configurada.';
+
+  @override
+  String get settings_freshness_days_label => 'Días';
+
+  @override
+  String get gen_Save => 'Guardar';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days días',
+      one: '1 día',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Hace $days días',
+      one: 'Ayer',
+      zero: 'Hoy',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Fresco';
+
+  @override
+  String get freshnessExpiring => 'Consumir pronto';
+
+  @override
+  String get freshnessExpired => 'Caducado';
+
+  @override
+  String get containerDetailStorageLabel => 'Conservación';
+
+  @override
+  String get storageFridge => 'Nevera';
+
+  @override
+  String get storageFreezer => 'Congelador';
+
+  @override
+  String get containerDetailDateLabel => 'Fecha de Carga';
+
+  @override
+  String get guideWelcomeTitle => 'Te damos la bienvenida a Cibo';
+
+  @override
+  String get guideWelcomeText =>
+      '¿Cocinas con antelación? Cibo te dice cuántas porciones tienes y cuántos gramos tomar cada vez. Todo sin conexión, en tu teléfono.';
+
+  @override
+  String get guideCalcTitle => 'Pésalo y Cibo hace el resto';
+
+  @override
+  String get guideCalcText =>
+      'Toca + y pesa el contenedor vacío y luego lleno: Cibo calcula el peso de la comida. Introduce las porciones o el peso de una porción y el otro valor se calcula solo.';
+
+  @override
+  String get guideGnamTitle => '¡Gnam!';
+
+  @override
+  String get guideGnamText =>
+      'Cuando comas una porción, toca los cubiertos: las porciones y el peso se actualizan solos. Toca el plato para editarlo o actualizar su peso total.';
+
+  @override
+  String get guideFreshTitle => 'Siempre fresco';
+
+  @override
+  String get guideFreshText =>
+      'La etiqueta indica cuántos días lleva guardado el plato: verde si está fresco, naranja si conviene comerlo pronto, roja si ha superado su duración. Elige nevera o congelador para cada plato; las duraciones se cambian en Configuración.';
+
+  @override
+  String get guideSetsTitle => 'Tus contenedores';
+
+  @override
+  String get guideSetsText =>
+      'Guarda los contenedores que más usas, con foto y peso, en la pestaña Contenedores. Al añadir un plato, toca el icono del campo Peso del Contenedor para no tener que pesarlo otra vez.';
+
+  @override
+  String get guideLabelContainer => 'Contenedor';
+
+  @override
+  String get guideLabelFood => 'Comida';
+
+  @override
+  String get guideLabelTotal => 'Total';
+
+  @override
+  String get guideLabelPortions => 'Porciones';
+
+  @override
+  String get guideLabelPortion => 'Porción';
+
+  @override
+  String get guideSampleDish => 'Arroz basmati';
+
+  @override
+  String get guideSampleContainer => 'Contenedor azul';
+
+  @override
+  String get guideSkip => 'Omitir';
+
+  @override
+  String get guideNext => 'Siguiente';
+
+  @override
+  String get guideStart => 'Empezar';
 }

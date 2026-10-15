@@ -23,7 +23,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(1, 5360143009456191875),
     name: 'ContenitoreEntity',
-    lastPropertyId: const obx_int.IdUid(8, 1941727811085977414),
+    lastPropertyId: const obx_int.IdUid(9, 721388081163710727),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -66,6 +66,12 @@ final _entities = <obx_int.ModelEntity>[
         id: const obx_int.IdUid(8, 1941727811085977414),
         name: 'dataCaricamento',
         type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 721388081163710727),
+        name: 'nelFreezer',
+        type: 1,
         flags: 0,
       ),
     ],
@@ -177,7 +183,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final nomeOffset = object.nome == null
             ? null
             : fbb.writeString(object.nome!);
-        fbb.startTable(9);
+        fbb.startTable(10);
         fbb.addInt64(0, object.id);
         fbb.addOffset(1, nomeOffset);
         fbb.addFloat64(2, object.pesoContenitore);
@@ -185,6 +191,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         fbb.addInt64(4, object.porzioni);
         fbb.addFloat64(5, object.pesoPorzione);
         fbb.addInt64(7, object.dataCaricamento?.millisecondsSinceEpoch);
+        fbb.addBool(8, object.nelFreezer);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -223,7 +230,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
           )
           ..dataCaricamento = dataCaricamentoValue == null
               ? null
-              : DateTime.fromMillisecondsSinceEpoch(dataCaricamentoValue);
+              : DateTime.fromMillisecondsSinceEpoch(dataCaricamentoValue)
+          ..nelFreezer = const fb.BoolReader().vTableGet(
+            buffer,
+            rootOffset,
+            20,
+            false,
+          );
 
         return object;
       },
@@ -318,6 +331,11 @@ class ContenitoreEntity_ {
   /// See [ContenitoreEntity.dataCaricamento].
   static final dataCaricamento = obx.QueryDateProperty<ContenitoreEntity>(
     _entities[0].properties[6],
+  );
+
+  /// See [ContenitoreEntity.nelFreezer].
+  static final nelFreezer = obx.QueryBooleanProperty<ContenitoreEntity>(
+    _entities[0].properties[7],
   );
 }
 

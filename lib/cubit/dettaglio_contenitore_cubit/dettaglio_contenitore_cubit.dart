@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../../models/entities/contenitore_entity.dart';
 import '../../repositories/contenitori_repository.dart';
+import '../../utils/formato.dart';
 
 part 'dettaglio_contenitore_state.dart';
 
 class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
   final ContenitoriRepository _repository;
   final int contenitoreId;
+
+  /// Locale used to format the numbers and the date shown in the fields
+  final String locale;
 
   // Controller gestiti dal Cubit
   late final TextEditingController nameController;
@@ -17,12 +21,20 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
   late final TextEditingController foodWeightController;
   late final TextEditingController portionController;
   late final TextEditingController portionWeightController;
+  late final TextEditingController dataCaricamentoController;
+
+  /// Whether the food is stored in the freezer instead of the fridge
+  bool nelFreezer = false;
+
+  /// Day the food was stored, used to compute its freshness
+  DateTime dataCaricamento = DateTime.now();
 
   // Flag per evitare loop infiniti durante gli aggiornamenti automatici
   bool _isUpdating = false;
 
   DettaglioContenitoreCubit({
     required this.contenitoreId,
+    required this.locale,
     ContenitoriRepository? repository,
   }) : _repository = repository ?? ContenitoriRepository(),
        super(DettaglioContenitoreInitial()) {
@@ -38,6 +50,7 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
     foodWeightController = TextEditingController();
     portionController = TextEditingController();
     portionWeightController = TextEditingController();
+    dataCaricamentoController = TextEditingController();
   }
 
   void _setupListeners() {
@@ -70,11 +83,11 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
   /// Calcola tutti i valori possibili basandosi sui dati disponibili
   void _calculateAllPossibleValues(_FieldType changedField) {
     // Leggi i valori attuali
-    double? totalWeight = double.tryParse(totalWeightController.text);
-    double? containerWeight = double.tryParse(containerWeightController.text);
-    double? foodWeight = double.tryParse(foodWeightController.text);
+    double? totalWeight = parseDecimale(totalWeightController.text);
+    double? containerWeight = parseDecimale(containerWeightController.text);
+    double? foodWeight = parseDecimale(foodWeightController.text);
     int? portions = int.tryParse(portionController.text);
-    double? portionWeight = double.tryParse(portionWeightController.text);
+    double? portionWeight = parseDecimale(portionWeightController.text);
 
     // === CALCOLI PESI (totalWeight, containerWeight, foodWeight) ===
     // Relazione: totalWeight = containerWeight + foodWeight
@@ -163,7 +176,7 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
         final newPortionWeight = foodWeight / portions;
         _updateController(
           portionWeightController,
-          newPortionWeight.toStringAsFixed(2),
+          _formatDouble(newPortionWeight),
         );
         portionWeight = newPortionWeight;
       } else if (portionWeight != null && portionWeight > 0) {
@@ -204,7 +217,7 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
         final newPortionWeight = foodWeight / portions;
         _updateController(
           portionWeightController,
-          newPortionWeight.toStringAsFixed(2),
+          _formatDouble(newPortionWeight),
         );
       } else if (portionWeight != null && portionWeight > 0) {
         final newPortions = (foodWeight / portionWeight).round();
@@ -224,7 +237,7 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
         final newPortionWeight = foodWeight / portions;
         _updateController(
           portionWeightController,
-          newPortionWeight.toStringAsFixed(2),
+          _formatDouble(newPortionWeight),
         );
       } else if (portionWeight != null && portionWeight > 0) {
         final newPortions = (foodWeight / portionWeight).round();
@@ -263,11 +276,27 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
     }
   }
 
-  String _formatDouble(double value) {
-    // Rimuove decimali inutili (es. 100.0 -> 100)
-    return value == value.roundToDouble()
-        ? value.round().toString()
-        : value.toStringAsFixed(2);
+  /// Formatta il valore secondo la lingua, senza decimali inutili
+  /// (es. 100.0 -> "100", 133.333 -> "133,33" in italiano)
+  String _formatDouble(double value) => formattaNumero(value, locale);
+
+  String _formatNullable(double? value) =>
+      value == null ? '' : _formatDouble(value);
+
+  /// Imposta se il cibo è conservato in freezer o in frigo
+  void setNelFreezer(bool value) {
+    nelFreezer = value;
+    emit(DettaglioContenitoreModificato());
+  }
+
+  /// Imposta il giorno in cui il cibo è stato conservato
+  void setDataCaricamento(DateTime value) {
+    // Mantiene l'orario originale se il giorno non cambia
+    if (!DateUtils.isSameDay(value, dataCaricamento)) {
+      dataCaricamento = value;
+    }
+    dataCaricamentoController.text = formattaData(dataCaricamento, locale);
+    emit(DettaglioContenitoreModificato());
   }
 
   Future<void> _loadContenitore() async {
@@ -279,12 +308,17 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
       if (contenitore != null) {
         // Popola i controller con i dati esistenti
         nameController.text = contenitore.nome ?? '';
-        containerWeightController.text =
-            contenitore.pesoContenitore?.toString() ?? '';
-        foodWeightController.text = contenitore.pesoCibo?.toString() ?? '';
+        containerWeightController.text = _formatNullable(
+          contenitore.pesoContenitore,
+        );
+        foodWeightController.text = _formatNullable(contenitore.pesoCibo);
         portionController.text = contenitore.porzioni?.toString() ?? '';
-        portionWeightController.text =
-            contenitore.pesoPorzione?.toString() ?? '';
+        portionWeightController.text = _formatNullable(
+          contenitore.pesoPorzione,
+        );
+        nelFreezer = contenitore.nelFreezer;
+        dataCaricamento = contenitore.dataCaricamento ?? dataCaricamento;
+        dataCaricamentoController.text = formattaData(dataCaricamento, locale);
 
         emit(DettaglioContenitoreLoaded(contenitore));
       } else {
@@ -297,25 +331,23 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
 
   Future<void> saveContenitore() async {
     try {
-      final existingContenitore = _repository.get(contenitoreId);
-
       final contenitore = ContenitoreEntity()
         ..id = contenitoreId
         ..nome = nameController.text.isEmpty ? null : nameController.text
         ..pesoContenitore = containerWeightController.text.isEmpty
             ? null
-            : double.tryParse(containerWeightController.text)
+            : parseDecimale(containerWeightController.text)
         ..pesoCibo = foodWeightController.text.isEmpty
             ? null
-            : double.tryParse(foodWeightController.text)
+            : parseDecimale(foodWeightController.text)
         ..porzioni = portionController.text.isEmpty
             ? null
             : int.tryParse(portionController.text)
         ..pesoPorzione = portionWeightController.text.isEmpty
             ? null
-            : double.tryParse(portionWeightController.text)
-        ..dataCaricamento =
-            existingContenitore?.dataCaricamento ?? DateTime.now();
+            : parseDecimale(portionWeightController.text)
+        ..dataCaricamento = dataCaricamento
+        ..nelFreezer = nelFreezer;
 
       _repository.put(contenitore);
       emit(DettaglioContenitoreSaved());
@@ -347,6 +379,7 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
     foodWeightController.dispose();
     portionController.dispose();
     portionWeightController.dispose();
+    dataCaricamentoController.dispose();
     return super.close();
   }
 }

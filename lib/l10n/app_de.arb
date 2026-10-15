@@ -124,66 +124,6 @@
     "@help_intro": {
         "description": "Introduction text for the help screen"
     },
-    "help_step1": "Beginnen wir mit der Eingabe des Gerichtsnamens",
-    "@help_step1": {
-        "description": "Step 1 instruction"
-    },
-    "help_step2": "und sofort können wir das Gewicht des Behälters eingeben",
-    "@help_step2": {
-        "description": "Step 2 instruction"
-    },
-    "help_step2_note": ", mit Deckel falls vorhanden.",
-    "@help_step2_note": {
-        "description": "Note for step 2"
-    },
-    "help_step3": "Wenn wir noch nicht alles bereit haben, können wir speichern",
-    "@help_step3": {
-        "description": "Step 3 instruction"
-    },
-    "help_step3_note": "und fortfahren, sobald wir das Gericht zubereitet haben.",
-    "@help_step3_note": {
-        "description": "Note for step 3"
-    },
-    "help_step4": "Sobald alles bereit ist, füllen wir den Behälter und wiegen ihn, mit Deckel falls vorhanden, und geben sein Gesamtgewicht ein",
-    "@help_step4": {
-        "description": "Step 4 instruction"
-    },
-    "help_step5": "wir werden sehen, dass",
-    "@help_step5": {
-        "description": "Step 5 instruction part 1"
-    },
-    "help_step5_note": "automatisch berechnet wird und bei Änderung von",
-    "@help_step5_note": {
-        "description": "Step 5 instruction part 2"
-    },
-    "help_step5_end": "entsprechend aktualisiert wird.",
-    "@help_step5_end": {
-        "description": "Step 5 instruction part 3"
-    },
-    "help_step6": "Jetzt können wir wählen, ob wir die Anzahl der Portionen eingeben",
-    "@help_step6": {
-        "description": "Step 6 instruction part 1"
-    },
-    "help_step6_note": "oder das Gewicht einer einzelnen Portion",
-    "@help_step6_note": {
-        "description": "Step 6 instruction part 2"
-    },
-    "help_step6_end": ", die Eingabe einer aktualisiert automatisch die andere.",
-    "@help_step6_end": {
-        "description": "Step 6 instruction part 3"
-    },
-    "help_step7": "Wir können jetzt alles mit der Speichern-Taste speichern",
-    "@help_step7": {
-        "description": "Step 7 instruction"
-    },
-    "help_gnam": "Wenn wir essen, können wir anstatt die Werte manuell zu ändern die Gnam-Taste verwenden",
-    "@help_gnam": {
-        "description": "Gnam button instruction"
-    },
-    "help_gnam_note": "die eine Portion aus dem Behälter entfernt und alle Daten aktualisiert.",
-    "@help_gnam_note": {
-        "description": "Gnam button note"
-    },
     "help_thanks": "Danke, dass du Cibo heruntergeladen hast.",
     "@help_thanks": {
         "description": "Thank you message"
@@ -256,5 +196,163 @@
     "presetPickerEmpty": "Noch keine Behälter-Vorlagen gespeichert.\nFüge sie über den Behälter-Tab hinzu.",
     "@presetPickerEmpty": {
         "description": "Message when no presets are available in the picker"
+    },
+    "settings_theme_system": "System",
+    "@settings_theme_system": {
+        "description": "Theme option that follows the system setting"
+    },
+    "settings_theme_light": "Hell",
+    "@settings_theme_light": {
+        "description": "Theme option for the light theme"
+    },
+    "settings_theme_dark": "Dunkel",
+    "@settings_theme_dark": {
+        "description": "Theme option for the dark theme"
+    },
+    "settings_freshness_fridge": "Haltbarkeit im Kühlschrank",
+    "@settings_freshness_fridge": {
+        "description": "Label for the setting of how many days food keeps in the fridge"
+    },
+    "settings_freshness_freezer": "Haltbarkeit im Gefrierschrank",
+    "@settings_freshness_freezer": {
+        "description": "Label for the setting of how many days food keeps in the freezer"
+    },
+    "settings_freshness_note": "Die Markierung neben jedem Gericht wird orange, wenn es bald gegessen werden sollte, und rot, wenn die eingestellte Haltbarkeit überschritten ist.",
+    "@settings_freshness_note": {
+        "description": "Explanation of the freshness badge shown below the freshness settings"
+    },
+    "settings_freshness_days_label": "Tage",
+    "@settings_freshness_days_label": {
+        "description": "Label for the number of days field in the shelf life dialog"
+    },
+    "gen_Save": "Speichern",
+    "@gen_Save": {
+        "description": "Save button label"
+    },
+    "freshnessDays": "{days, plural, =1{1 Tag} other{{days} Tage}}",
+    "@freshnessDays": {
+        "description": "Number of days of shelf life",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "freshnessAge": "{days, plural, =0{Heute} =1{Gestern} other{Vor {days} Tagen}}",
+    "@freshnessAge": {
+        "description": "How long ago the food was stored, shown in the freshness badge",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "freshnessFresh": "Frisch",
+    "@freshnessFresh": {
+        "description": "Freshness status: the food is fresh"
+    },
+    "freshnessExpiring": "Bald essen",
+    "@freshnessExpiring": {
+        "description": "Freshness status: the food should be eaten soon"
+    },
+    "freshnessExpired": "Abgelaufen",
+    "@freshnessExpired": {
+        "description": "Freshness status: the food is past its shelf life"
+    },
+    "containerDetailStorageLabel": "Aufbewahrung",
+    "@containerDetailStorageLabel": {
+        "description": "Label for the storage (fridge or freezer) selector in the container detail page"
+    },
+    "storageFridge": "Kühlschrank",
+    "@storageFridge": {
+        "description": "Storage option: fridge"
+    },
+    "storageFreezer": "Gefrierschrank",
+    "@storageFreezer": {
+        "description": "Storage option: freezer"
+    },
+    "containerDetailDateLabel": "Uploaddatum",
+    "@containerDetailDateLabel": {
+        "description": "Label for the upload date field in the container detail page"
+    },
+    "guideWelcomeTitle": "Willkommen bei Cibo",
+    "@guideWelcomeTitle": {
+        "description": "Title of the welcome page of the introductory guide"
+    },
+    "guideWelcomeText": "Kochst du vor? Cibo sagt dir, wie viele Portionen du hast und wie viele Gramm du jedes Mal entnehmen sollst. Alles offline, auf deinem Handy.",
+    "@guideWelcomeText": {
+        "description": "Text of the welcome page of the introductory guide"
+    },
+    "guideCalcTitle": "Wiegen – den Rest macht Cibo",
+    "@guideCalcTitle": {
+        "description": "Title of the guide section explaining the automatic weight calculation"
+    },
+    "guideCalcText": "Tippe auf + und wiege den Behälter leer und dann voll: Cibo berechnet das Gewicht des Essens. Gib die Portionen oder das Gewicht einer Portion ein, der andere Wert wird automatisch berechnet.",
+    "@guideCalcText": {
+        "description": "Text of the guide section explaining the automatic weight calculation"
+    },
+    "guideGnamTitle": "Gnam!",
+    "@guideGnamTitle": {
+        "description": "Title of the guide section explaining the Gnam button"
+    },
+    "guideGnamText": "Wenn du eine Portion isst, tippe auf das Besteck: Portionen und Gewicht werden automatisch aktualisiert. Tippe auf das Gericht, um es zu bearbeiten oder sein Gesamtgewicht zu aktualisieren.",
+    "@guideGnamText": {
+        "description": "Text of the guide section explaining the Gnam button"
+    },
+    "guideFreshTitle": "Immer frisch",
+    "@guideFreshTitle": {
+        "description": "Title of the guide section explaining the freshness badge"
+    },
+    "guideFreshText": "Die Markierung zeigt, seit wie vielen Tagen das Gericht aufbewahrt wird: grün, wenn es frisch ist, orange, wenn es bald gegessen werden sollte, rot, wenn die Haltbarkeit überschritten ist. Wähle für jedes Gericht Kühlschrank oder Gefrierschrank; die Haltbarkeit änderst du in den Einstellungen.",
+    "@guideFreshText": {
+        "description": "Text of the guide section explaining the freshness badge"
+    },
+    "guideSetsTitle": "Deine Behälter",
+    "@guideSetsTitle": {
+        "description": "Title of the guide section explaining the saved containers"
+    },
+    "guideSetsText": "Speichere die Behälter, die du am häufigsten nutzt, mit Foto und Gewicht im Tab Behälter. Wenn du ein Gericht hinzufügst, tippe auf das Symbol im Feld Behältergewicht, damit du ihn nicht erneut wiegen musst.",
+    "@guideSetsText": {
+        "description": "Text of the guide section explaining the saved containers"
+    },
+    "guideLabelContainer": "Behälter",
+    "@guideLabelContainer": {
+        "description": "Short label for the container weight in the guide calculation example"
+    },
+    "guideLabelFood": "Essen",
+    "@guideLabelFood": {
+        "description": "Short label for the food weight in the guide calculation example"
+    },
+    "guideLabelTotal": "Gesamt",
+    "@guideLabelTotal": {
+        "description": "Short label for the total weight in the guide calculation example"
+    },
+    "guideLabelPortions": "Portionen",
+    "@guideLabelPortions": {
+        "description": "Short label for the number of portions in the guide calculation example"
+    },
+    "guideLabelPortion": "Portion",
+    "@guideLabelPortion": {
+        "description": "Short label for the weight of a portion in the guide calculation example"
+    },
+    "guideSampleDish": "Basmatireis",
+    "@guideSampleDish": {
+        "description": "Name of the sample dish shown in the guide"
+    },
+    "guideSampleContainer": "Blauer Behälter",
+    "@guideSampleContainer": {
+        "description": "Name of the sample container shown in the guide"
+    },
+    "guideSkip": "Überspringen",
+    "@guideSkip": {
+        "description": "Button to skip the introductory guide"
+    },
+    "guideNext": "Weiter",
+    "@guideNext": {
+        "description": "Button to go to the next page of the introductory guide"
+    },
+    "guideStart": "Los geht's",
+    "@guideStart": {
+        "description": "Button to close the introductory guide on its last page"
     }
 }

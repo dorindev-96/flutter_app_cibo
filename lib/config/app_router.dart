@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../main.dart';
+import '../screens/guida_iniziale_screen.dart';
 import '../screens/main_shell_screen.dart';
 import '../screens/elenco_contenitori_frigo_screen.dart';
 import '../screens/dettaglio_contenitore_frigo_screen.dart';
@@ -27,9 +29,19 @@ final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
 ///
 /// Uses [StatefulShellRoute.indexedStack] for a [NavigationBar] that
 /// preserves each tab's navigation state independently.
+///
+/// At the first launch the app opens the introductory guide
+/// ([mostraGuidaIniziale] is set in `main` before the router is first used).
 final appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
+  initialLocation: mostraGuidaIniziale ? '/benvenuto' : '/',
   routes: [
+    // Introductory guide, outside the tabs
+    GoRoute(
+      path: '/benvenuto',
+      builder: (context, state) => const GuidaInizialeScreen(),
+    ),
+
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return MainShellScreen(navigationShell: navigationShell);

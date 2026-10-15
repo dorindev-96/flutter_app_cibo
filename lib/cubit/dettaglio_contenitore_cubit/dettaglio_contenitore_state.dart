@@ -13,6 +13,10 @@ final class DettaglioContenitoreLoaded extends DettaglioContenitoreState {
   DettaglioContenitoreLoaded(this.contenitore);
 }
 
+/// Emitted when a field that is not a text field (storage or date) changes,
+/// so that the form is rebuilt.
+final class DettaglioContenitoreModificato extends DettaglioContenitoreState {}
+
 final class DettaglioContenitoreSaved extends DettaglioContenitoreState {}
 
 final class DettaglioContenitoreError extends DettaglioContenitoreState {

@@ -94,58 +94,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get help_intro => 'Let\'s see how to make the best use of Cibo.';
 
   @override
-  String get help_step1 => 'Start by entering the name of the dish';
-
-  @override
-  String get help_step2 =>
-      'and immediately we can enter the weight of the container';
-
-  @override
-  String get help_step2_note => ', with the lid if applicable.';
-
-  @override
-  String get help_step3 =>
-      'At this point, if we don\'t have everything ready yet, we can save';
-
-  @override
-  String get help_step3_note => 'and continue once we have prepared the dish.';
-
-  @override
-  String get help_step4 =>
-      'Once everything is ready, fill the container and weigh it, with the lid if applicable, and enter its total weight';
-
-  @override
-  String get help_step5 => 'we will see that';
-
-  @override
-  String get help_step5_note => 'is calculated automatically and by changing';
-
-  @override
-  String get help_step5_end => 'it will update accordingly.';
-
-  @override
-  String get help_step6 =>
-      'At this point we can choose to enter the number of portions';
-
-  @override
-  String get help_step6_note => 'or the weight of a single portion';
-
-  @override
-  String get help_step6_end =>
-      ', entering one will automatically update the other.';
-
-  @override
-  String get help_step7 => 'We can now save everything using the save button';
-
-  @override
-  String get help_gnam =>
-      'When we eat our meal, instead of manually changing the values we can use the Gnam button';
-
-  @override
-  String get help_gnam_note =>
-      'which will remove one portion from the container and update all the data.';
-
-  @override
   String get help_thanks => 'Thank you for downloading Cibo.';
 
   @override
@@ -198,4 +146,138 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'No container presets saved yet.\nAdd them from the Containers tab.';
+
+  @override
+  String get settings_theme_system => 'System';
+
+  @override
+  String get settings_theme_light => 'Light';
+
+  @override
+  String get settings_theme_dark => 'Dark';
+
+  @override
+  String get settings_freshness_fridge => 'Fridge shelf life';
+
+  @override
+  String get settings_freshness_freezer => 'Freezer shelf life';
+
+  @override
+  String get settings_freshness_note =>
+      'The badge next to each dish turns orange when it should be eaten soon and red once it is past the shelf life you set.';
+
+  @override
+  String get settings_freshness_days_label => 'Days';
+
+  @override
+  String get gen_Save => 'Save';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days ago',
+      one: 'Yesterday',
+      zero: 'Today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Fresh';
+
+  @override
+  String get freshnessExpiring => 'Eat soon';
+
+  @override
+  String get freshnessExpired => 'Expired';
+
+  @override
+  String get containerDetailStorageLabel => 'Storage';
+
+  @override
+  String get storageFridge => 'Fridge';
+
+  @override
+  String get storageFreezer => 'Freezer';
+
+  @override
+  String get containerDetailDateLabel => 'Upload Date';
+
+  @override
+  String get guideWelcomeTitle => 'Welcome to Cibo';
+
+  @override
+  String get guideWelcomeText =>
+      'Cooking ahead? Cibo tells you how many portions you have and how many grams to take each time. All offline, on your phone.';
+
+  @override
+  String get guideCalcTitle => 'Weigh it, Cibo does the rest';
+
+  @override
+  String get guideCalcText =>
+      'Tap + and weigh the container empty and then full: Cibo works out the weight of the food. Enter the portions or the weight of one portion and the other value is calculated for you.';
+
+  @override
+  String get guideGnamTitle => 'Gnam!';
+
+  @override
+  String get guideGnamText =>
+      'When you eat a portion, tap the cutlery: portions and weight update by themselves. Tap the dish to edit it or update its total weight.';
+
+  @override
+  String get guideFreshTitle => 'Always fresh';
+
+  @override
+  String get guideFreshText =>
+      'The badge shows how many days the dish has been stored: green when it is fresh, orange when it should be eaten soon, red once it is past its shelf life. Choose fridge or freezer for each dish; you can change the shelf life in Settings.';
+
+  @override
+  String get guideSetsTitle => 'Your containers';
+
+  @override
+  String get guideSetsText =>
+      'Save the containers you use most, with photo and weight, in the Containers tab. When adding a dish, tap the icon in the Container Weight field so you don\'t have to weigh it again.';
+
+  @override
+  String get guideLabelContainer => 'Container';
+
+  @override
+  String get guideLabelFood => 'Food';
+
+  @override
+  String get guideLabelTotal => 'Total';
+
+  @override
+  String get guideLabelPortions => 'Portions';
+
+  @override
+  String get guideLabelPortion => 'Portion';
+
+  @override
+  String get guideSampleDish => 'Basmati rice';
+
+  @override
+  String get guideSampleContainer => 'Blue container';
+
+  @override
+  String get guideSkip => 'Skip';
+
+  @override
+  String get guideNext => 'Next';
+
+  @override
+  String get guideStart => 'Get started';
 }

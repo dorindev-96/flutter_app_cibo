@@ -94,55 +94,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get help_intro => 'Låt oss se hur man använder Cibo på bästa sätt.';
 
   @override
-  String get help_step1 => 'Börja med att ange namnet på maträtten';
-
-  @override
-  String get help_step2 => 'och direkt kan vi ange vikten på behållaren';
-
-  @override
-  String get help_step2_note => ', med locket om tillämpligt.';
-
-  @override
-  String get help_step3 => 'Om vi inte har allt klart än kan vi spara';
-
-  @override
-  String get help_step3_note => 'och fortsätta när vi har förberett maträtten.';
-
-  @override
-  String get help_step4 =>
-      'När allt är klart, fyll behållaren och väg den, med locket om tillämpligt, och ange dess totalvikt';
-
-  @override
-  String get help_step5 => 'vi kommer att se att';
-
-  @override
-  String get help_step5_note => 'beräknas automatiskt och genom att ändra';
-
-  @override
-  String get help_step5_end => 'uppdateras det därefter.';
-
-  @override
-  String get help_step6 => 'Nu kan vi välja att ange antalet portioner';
-
-  @override
-  String get help_step6_note => 'eller vikten på en enskild portion';
-
-  @override
-  String get help_step6_end =>
-      ', att ange en uppdaterar automatiskt den andra.';
-
-  @override
-  String get help_step7 => 'Vi kan nu spara allt med sparaknappen';
-
-  @override
-  String get help_gnam =>
-      'När vi äter, istället för att ändra värdena manuellt kan vi använda Gnam-knappen';
-
-  @override
-  String get help_gnam_note =>
-      'som tar bort en portion från behållaren och uppdaterar all data.';
-
-  @override
   String get help_thanks => 'Tack för att du laddade ner Cibo.';
 
   @override
@@ -195,4 +146,138 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get presetPickerEmpty =>
       'Inga förinställda behållare sparade.\nLägg till dem från fliken Behållare.';
+
+  @override
+  String get settings_theme_system => 'System';
+
+  @override
+  String get settings_theme_light => 'Ljust';
+
+  @override
+  String get settings_theme_dark => 'Mörkt';
+
+  @override
+  String get settings_freshness_fridge => 'Hållbarhet i kylskåp';
+
+  @override
+  String get settings_freshness_freezer => 'Hållbarhet i frys';
+
+  @override
+  String get settings_freshness_note =>
+      'Märket bredvid varje rätt blir orange när den bör ätas snart och rött när den har passerat den inställda hållbarheten.';
+
+  @override
+  String get settings_freshness_days_label => 'Dagar';
+
+  @override
+  String get gen_Save => 'Spara';
+
+  @override
+  String freshnessDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dagar',
+      one: '1 dag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String freshnessAge(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'För $days dagar sedan',
+      one: 'Igår',
+      zero: 'Idag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get freshnessFresh => 'Färsk';
+
+  @override
+  String get freshnessExpiring => 'Ät snart';
+
+  @override
+  String get freshnessExpired => 'Utgången';
+
+  @override
+  String get containerDetailStorageLabel => 'Förvaring';
+
+  @override
+  String get storageFridge => 'Kylskåp';
+
+  @override
+  String get storageFreezer => 'Frys';
+
+  @override
+  String get containerDetailDateLabel => 'Uppladdningsdatum';
+
+  @override
+  String get guideWelcomeTitle => 'Välkommen till Cibo';
+
+  @override
+  String get guideWelcomeText =>
+      'Lagar du mat i förväg? Cibo berättar hur många portioner du har och hur många gram du ska ta varje gång. Allt offline, i din telefon.';
+
+  @override
+  String get guideCalcTitle => 'Väg, Cibo sköter resten';
+
+  @override
+  String get guideCalcText =>
+      'Tryck på + och väg behållaren tom och sedan full: Cibo räknar ut matens vikt. Ange antalet portioner eller vikten på en portion, så räknas det andra värdet ut automatiskt.';
+
+  @override
+  String get guideGnamTitle => 'Gnam!';
+
+  @override
+  String get guideGnamText =>
+      'När du äter en portion trycker du på besticken: portioner och vikt uppdateras automatiskt. Tryck på rätten för att redigera den eller uppdatera totalvikten.';
+
+  @override
+  String get guideFreshTitle => 'Alltid färskt';
+
+  @override
+  String get guideFreshText =>
+      'Märket visar hur många dagar rätten har förvarats: grönt om den är färsk, orange om den bör ätas snart, rött om den har passerat hållbarheten. Välj kylskåp eller frys för varje rätt; hållbarheten ändrar du under Inställningar.';
+
+  @override
+  String get guideSetsTitle => 'Dina behållare';
+
+  @override
+  String get guideSetsText =>
+      'Spara de behållare du använder mest, med foto och vikt, under fliken Behållare. När du lägger till en rätt trycker du på ikonen i fältet Behållarens vikt så slipper du väga den igen.';
+
+  @override
+  String get guideLabelContainer => 'Behållare';
+
+  @override
+  String get guideLabelFood => 'Mat';
+
+  @override
+  String get guideLabelTotal => 'Totalt';
+
+  @override
+  String get guideLabelPortions => 'Portioner';
+
+  @override
+  String get guideLabelPortion => 'Portion';
+
+  @override
+  String get guideSampleDish => 'Basmatiris';
+
+  @override
+  String get guideSampleContainer => 'Blå behållare';
+
+  @override
+  String get guideSkip => 'Hoppa över';
+
+  @override
+  String get guideNext => 'Nästa';
+
+  @override
+  String get guideStart => 'Kom igång';
 }

@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../cubit/freschezza_cubit/freschezza_cubit.dart';
 import '../l10n/app_localizations.dart';
+import '../models/freschezza.dart';
 
 import '../widgets/contenitore_frigo_widget.dart';
 import '../bloc/elenco_contenitori_frigo_screen/elenco_contenitori_frigo_screen_bloc.dart';
@@ -11,9 +13,36 @@ import '../bloc/elenco_contenitori_frigo_screen/elenco_contenitori_frigo_screen_
 /// Screen that displays the list of containers in the fridge
 ///
 /// Uses localized strings for the title and includes a floating action button
-/// to add new containers.
-class ElencoContenitoriFrigoScreen extends StatelessWidget {
+/// to add new containers. The list is sorted by freshness, most urgent first,
+/// and is reloaded when the app returns to the foreground so that the
+/// freshness of the food stays up to date.
+class ElencoContenitoriFrigoScreen extends StatefulWidget {
   const ElencoContenitoriFrigoScreen({super.key});
+
+  @override
+  State<ElencoContenitoriFrigoScreen> createState() =>
+      _ElencoContenitoriFrigoScreenState();
+}
+
+class _ElencoContenitoriFrigoScreenState
+    extends State<ElencoContenitoriFrigoScreen> {
+  late final AppLifecycleListener _lifecycleListener;
+
+  @override
+  void initState() {
+    super.initState();
+    _lifecycleListener = AppLifecycleListener(
+      onResume: () => context.read<ElencoContenitoriFrigoScreenBloc>().add(
+        LoadContenitoriEvent(),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _lifecycleListener.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +111,41 @@ class ElencoContenitoriFrigoScreen extends StatelessWidget {
       }
 
       final theme = Theme.of(context);
+      final durate = context.watch<FreschezzaCubit>().state;
+      final oggi = DateTime.now();
+
+      // Most urgent first: fewest days left until the end of the shelf life.
+      final elementi = [
+        for (final contenitore in contenitori)
+          (
+            contenitore: contenitore,
+            freschezza: Freschezza.calcola(
+              dataCaricamento: contenitore.dataCaricamento ?? oggi,
+              durataGiorni: durate.giorniPer(
+                nelFreezer: contenitore.nelFreezer,
+              ),
+              oggi: oggi,
+            ),
+          ),
+      ];
+      elementi.sort((a, b) {
+        final perUrgenza = a.freschezza.giorniRimanenti.compareTo(
+          b.freschezza.giorniRimanenti,
+        );
+        if (perUrgenza != 0) return perUrgenza;
+        final perData = (a.contenitore.dataCaricamento ?? oggi).compareTo(
+          b.contenitore.dataCaricamento ?? oggi,
+        );
+        return perData != 0
+            ? perData
+            : a.contenitore.id.compareTo(b.contenitore.id);
+      });
 
       return ListView.builder(
         padding: EdgeInsets.only(top: 8.h, bottom: 88.h),
-        itemCount: contenitori.length,
+        itemCount: elementi.length,
         itemBuilder: (context, index) {
-          final contenitore = contenitori[index];
+          final (:contenitore, :freschezza) = elementi[index];
           return Dismissible(
             key: Key('dismissible_${contenitore.id}'),
             direction: DismissDirection.horizontal,
@@ -128,7 +186,9 @@ class ElencoContenitoriFrigoScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               onTap: () => _editContenitore(context, contenitore.id),
               child: ContenitoreFrigoWidget(
-                dataInserimento: contenitore.dataCaricamento ?? DateTime.now(),
+                dataInserimento: contenitore.dataCaricamento ?? oggi,
+                freschezza: freschezza,
+                nelFreezer: contenitore.nelFreezer,
                 nomeContenitore: contenitore.nome ?? appLoc.no_name,
                 porzioniDisponibili: contenitore.porzioni ?? 0,
                 pesoPorzione: contenitore.pesoPorzione ?? 0,
@@ -171,7 +231,9 @@ class ElencoContenitoriFrigoScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(appLoc.gen_Confirm_Delete_Title),
-        content: Text(appLoc.gen_Confirm_Delete_Message(nome ?? appLoc.no_name)),
+        content: Text(
+          appLoc.gen_Confirm_Delete_Message(nome ?? appLoc.no_name),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),

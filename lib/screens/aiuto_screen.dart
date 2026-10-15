@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../l10n/app_localizations.dart';
-import '../widgets/custom_image_widget.dart';
+import '../widgets/guida_sezioni.dart';
 
+/// Help screen explaining how to use the app.
+///
+/// Each section shows an example built with the real widgets of the app
+/// (see [SezioneGuida]), so it stays up to date with the current look.
 class AiutoScreen extends StatelessWidget {
   const AiutoScreen({super.key});
 
@@ -11,168 +15,93 @@ class AiutoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
-    final numberStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      color: theme.colorScheme.primary,
-      fontSize: 16.sp,
-    );
-    final textStyle = TextStyle(fontSize: 14.sp, height: 1.5);
-
-    Widget styledNumber(String number) {
-      return Text(' ($number) ', style: numberStyle);
-    }
+    final mutedColor = theme.colorScheme.onSurface.withValues(alpha: 0.7);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.help_title)),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: theme.colorScheme.outline.withValues(alpha: 0.3),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    height: 350.h,
-                    child: CustomImageWidget(
-                      themeMode: theme.brightness == Brightness.dark
-                          ? ThemeMode.dark
-                          : ThemeMode.light,
-                      imagePathLight: 'assets/Images/Screenshot_1_l.png',
-                      imagePathDark: 'assets/Images/Screenshot_1_d.png',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: theme.colorScheme.outline.withValues(alpha: 0.3),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    height: 350.h,
-                    child: CustomImageWidget(
-                      themeMode: theme.brightness == Brightness.dark
-                          ? ThemeMode.dark
-                          : ThemeMode.light,
-                      imagePathLight: 'assets/Images/Screenshot_2_l.png',
-                      imagePathDark: 'assets/Images/Screenshot_2_d.png',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 28.h),
-            // Introduction
-            Text(
+      body: ListView(
+        padding: EdgeInsets.symmetric(vertical: 20.h),
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
               l10n.help_intro,
-              style: textStyle.copyWith(fontWeight: FontWeight.w600),
+              style: theme.textTheme.bodyLarge?.copyWith(color: mutedColor),
             ),
+          ),
+          SizedBox(height: 12.h),
+          for (final sezione in SezioneGuida.values) ...[
             SizedBox(height: 16.h),
-            // Step 1-2
-            Text.rich(
-              TextSpan(
-                style: textStyle,
-                children: [
-                  TextSpan(text: l10n.help_step1),
-                  WidgetSpan(child: styledNumber('1')),
-                  TextSpan(text: l10n.help_step2),
-                  WidgetSpan(child: styledNumber('2')),
-                  TextSpan(text: l10n.help_step2_note),
-                ],
-              ),
-            ),
-            SizedBox(height: 12.h),
-            // Step 3
-            Text.rich(
-              TextSpan(
-                style: textStyle,
-                children: [
-                  TextSpan(text: l10n.help_step3),
-                  WidgetSpan(child: styledNumber('7')),
-                  TextSpan(text: l10n.help_step3_note),
-                ],
-              ),
-            ),
-            SizedBox(height: 12.h),
-            // Step 4
-            Text.rich(
-              TextSpan(
-                style: textStyle,
-                children: [
-                  TextSpan(text: l10n.help_step4),
-                  WidgetSpan(child: styledNumber('3')),
-                  TextSpan(text: ', '),
-                  TextSpan(text: l10n.help_step5),
-                  WidgetSpan(child: styledNumber('4')),
-                  TextSpan(text: l10n.help_step5_note),
-                  WidgetSpan(child: styledNumber('3')),
-                  TextSpan(text: l10n.help_step5_end),
-                ],
-              ),
-            ),
-            SizedBox(height: 12.h),
-            // Step 5-6
-            Text.rich(
-              TextSpan(
-                style: textStyle,
-                children: [
-                  TextSpan(text: l10n.help_step6),
-                  WidgetSpan(child: styledNumber('5')),
-                  TextSpan(text: l10n.help_step6_note),
-                  WidgetSpan(child: styledNumber('6')),
-                  TextSpan(text: l10n.help_step6_end),
-                ],
-              ),
-            ),
-            SizedBox(height: 12.h),
-            // Step 7
-            Text.rich(
-              TextSpan(
-                style: textStyle,
-                children: [
-                  TextSpan(text: l10n.help_step7),
-                  WidgetSpan(child: styledNumber('7')),
-                  const TextSpan(text: '.'),
-                ],
-              ),
-            ),
-            SizedBox(height: 16.h),
-            // Gnam button
-            Text.rich(
-              TextSpan(
-                style: textStyle,
-                children: [
-                  TextSpan(text: l10n.help_gnam),
-                  WidgetSpan(child: styledNumber('8')),
-                  TextSpan(text: l10n.help_gnam_note),
-                ],
-              ),
-            ),
-            SizedBox(height: 28.h),
-            // Thanks
-            Center(
+            _IntestazioneSezione(sezione: sezione),
+            SizedBox(height: 8.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
-                l10n.help_thanks,
-                style: textStyle.copyWith(fontStyle: FontStyle.italic),
+                sezione.testo(l10n),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: mutedColor,
+                  height: 1.4,
+                ),
               ),
             ),
-            SizedBox(height: 32.h),
+            SizedBox(height: 10.h),
+            sezione.esempio,
+            SizedBox(height: 8.h),
           ],
-        ),
+          SizedBox(height: 24.h),
+          Center(
+            child: Text(
+              l10n.help_thanks,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: mutedColor,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Icon and title of a section of the guide.
+class _IntestazioneSezione extends StatelessWidget {
+  const _IntestazioneSezione({required this.sezione});
+
+  final SezioneGuida sezione;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Row(
+        children: [
+          Container(
+            width: 36.w,
+            height: 36.w,
+            decoration: BoxDecoration(
+              color: colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              sezione.icona,
+              size: 20.w,
+              color: colorScheme.onPrimaryContainer,
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Expanded(
+            child: Text(
+              sezione.titolo(AppLocalizations.of(context)!),
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

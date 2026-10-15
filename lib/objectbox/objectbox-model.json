@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:5360143009456191875",
-      "lastPropertyId": "8:1941727811085977414",
+      "lastPropertyId": "9:721388081163710727",
       "name": "ContenitoreEntity",
       "properties": [
         {
@@ -43,6 +43,11 @@
           "id": "8:1941727811085977414",
           "name": "dataCaricamento",
           "type": 10
+        },
+        {
+          "id": "9:721388081163710727",
+          "name": "nelFreezer",
+          "type": 1
         }
       ],
       "relations": []

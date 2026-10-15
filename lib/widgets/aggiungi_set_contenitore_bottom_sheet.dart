@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../l10n/app_localizations.dart';
+import '../utils/formato.dart';
 import '../widgets/input_dettaglio_contenitore_widget.dart';
 
 /// A modal bottom sheet form for adding a new container set.
@@ -87,7 +88,10 @@ class _AggiungiSetContenitoreBottomSheetState
             InputDettaglioContenitoreWidget(
               label: appLoc.containerSetsWeightLabel,
               controller: _weightController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              inputFormatters: const [DecimaleInputFormatter()],
             ),
 
             // Image section
@@ -222,7 +226,7 @@ class _AggiungiSetContenitoreBottomSheetState
   /// Validates the form and calls the [onSave] callback.
   void _onSave() {
     final nome = _nameController.text.trim();
-    final peso = double.tryParse(_weightController.text.trim()) ?? 0;
+    final peso = parseDecimale(_weightController.text) ?? 0;
 
     widget.onSave(nome, _imagePath, peso);
     Navigator.of(context).pop();

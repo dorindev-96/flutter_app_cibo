@@ -16,6 +16,11 @@ class SetContenitoriRepository {
     return _box.put(entity);
   }
 
+  /// Updates an existing container set.
+  void put(SetContenitoriEntity entity) {
+    _box.put(entity);
+  }
+
   /// Retrieves a single container set by its ID.
   SetContenitoriEntity? get(int id) {
     return _box.get(id);

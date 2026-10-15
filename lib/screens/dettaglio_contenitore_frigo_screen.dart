@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../cubit/dettaglio_contenitore_cubit/dettaglio_contenitore_cubit.dart';
 import '../l10n/app_localizations.dart';
+import '../utils/formato.dart';
 import '../widgets/input_dettaglio_contenitore_widget.dart';
 import '../widgets/seleziona_set_contenitore_bottom_sheet.dart';
+
+/// Keyboard for the weight fields, which accept decimal numbers.
+const _tastieraDecimale = TextInputType.numberWithOptions(decimal: true);
 
 /// A screen that displays the details of a refrigerator container.
 ///
@@ -25,8 +30,10 @@ class DettaglioContenitoreFrigoScreen extends StatelessWidget {
     final appLoc = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) =>
-          DettaglioContenitoreCubit(contenitoreId: idContenitore),
+      create: (context) => DettaglioContenitoreCubit(
+        contenitoreId: idContenitore,
+        locale: appLoc.localeName,
+      ),
       child: BlocConsumer<DettaglioContenitoreCubit, DettaglioContenitoreState>(
         listener: (context, state) {
           if (state is DettaglioContenitoreSaved) {
@@ -45,6 +52,7 @@ class DettaglioContenitoreFrigoScreen extends StatelessWidget {
           }
 
           final cubit = context.read<DettaglioContenitoreCubit>();
+          final theme = Theme.of(context);
 
           return Scaffold(
             appBar: AppBar(
@@ -78,11 +86,12 @@ class DettaglioContenitoreFrigoScreen extends StatelessWidget {
                             key: Key('contweight_$idContenitore'),
                             label: appLoc.containerDetailContainerWeightLabel,
                             controller: cubit.containerWeightController,
-                            keyboardType: TextInputType.number,
+                            keyboardType: _tastieraDecimale,
+                            inputFormatters: const [DecimaleInputFormatter()],
                             suffixIcon: IconButton(
                               icon: Icon(
                                 Icons.inventory_2_outlined,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: theme.colorScheme.primary,
                               ),
                               tooltip: appLoc.presetPickerTitle,
                               onPressed: () =>
@@ -93,25 +102,47 @@ class DettaglioContenitoreFrigoScreen extends StatelessWidget {
                             key: Key('totalweight_$idContenitore'),
                             label: appLoc.containerDetailTotalWeightLabel,
                             controller: cubit.totalWeightController,
-                            keyboardType: TextInputType.number,
+                            keyboardType: _tastieraDecimale,
+                            inputFormatters: const [DecimaleInputFormatter()],
                           ),
                           InputDettaglioContenitoreWidget(
                             key: Key('foodweight_$idContenitore'),
                             label: appLoc.containerDetailFoodWeightLabel,
                             controller: cubit.foodWeightController,
-                            keyboardType: TextInputType.number,
+                            keyboardType: _tastieraDecimale,
+                            inputFormatters: const [DecimaleInputFormatter()],
                           ),
                           InputDettaglioContenitoreWidget(
                             key: Key('portion_$idContenitore'),
                             label: appLoc.containerDetailPortionLabel,
                             controller: cubit.portionController,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                           ),
                           InputDettaglioContenitoreWidget(
                             key: Key('portionweight_$idContenitore'),
                             label: appLoc.containerDetailPortionWeightLabel,
                             controller: cubit.portionWeightController,
-                            keyboardType: TextInputType.number,
+                            keyboardType: _tastieraDecimale,
+                            inputFormatters: const [DecimaleInputFormatter()],
+                          ),
+                          _ConservazioneSelector(
+                            label: appLoc.containerDetailStorageLabel,
+                            nelFreezer: cubit.nelFreezer,
+                            onChanged: cubit.setNelFreezer,
+                          ),
+                          InputDettaglioContenitoreWidget(
+                            key: Key('date_$idContenitore'),
+                            label: appLoc.containerDetailDateLabel,
+                            controller: cubit.dataCaricamentoController,
+                            readOnly: true,
+                            onTap: () => _pickDate(context, cubit),
+                            suffixIcon: Icon(
+                              Icons.calendar_today_outlined,
+                              color: theme.colorScheme.primary,
+                            ),
                           ),
                         ],
                       ),
@@ -154,11 +185,83 @@ class DettaglioContenitoreFrigoScreen extends StatelessWidget {
       ),
       builder: (_) => SelezionaSetContenitoreBottomSheet(
         onSelected: (preset) {
-          cubit.containerWeightController.text =
-              preset.pesoInGrammi == preset.pesoInGrammi.roundToDouble()
-              ? preset.pesoInGrammi.round().toString()
-              : preset.pesoInGrammi.toStringAsFixed(2);
+          cubit.containerWeightController.text = formattaNumero(
+            preset.pesoInGrammi,
+            cubit.locale,
+          );
         },
+      ),
+    );
+  }
+
+  /// Opens a date picker to change the day the food was stored.
+  Future<void> _pickDate(
+    BuildContext context,
+    DettaglioContenitoreCubit cubit,
+  ) async {
+    final now = DateTime.now();
+    final data = await showDatePicker(
+      context: context,
+      initialDate: cubit.dataCaricamento.isAfter(now)
+          ? now
+          : cubit.dataCaricamento,
+      firstDate: DateTime(2000),
+      lastDate: now,
+    );
+    if (data != null) cubit.setDataCaricamento(data);
+  }
+}
+
+/// Selector for where the food is stored: fridge or freezer.
+class _ConservazioneSelector extends StatelessWidget {
+  const _ConservazioneSelector({
+    required this.label,
+    required this.nelFreezer,
+    required this.onChanged,
+  });
+
+  final String label;
+  final bool nelFreezer;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final appLoc = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+            ),
+          ),
+          SizedBox(height: 8.h),
+          SizedBox(
+            width: double.maxFinite,
+            child: SegmentedButton<bool>(
+              segments: [
+                ButtonSegment(
+                  value: false,
+                  icon: const Icon(Icons.kitchen_outlined),
+                  label: Text(appLoc.storageFridge),
+                ),
+                ButtonSegment(
+                  value: true,
+                  icon: const Icon(Icons.ac_unit),
+                  label: Text(appLoc.storageFreezer),
+                ),
+              ],
+              selected: {nelFreezer},
+              onSelectionChanged: (selezione) => onChanged(selezione.first),
+            ),
+          ),
+        ],
       ),
     );
   }

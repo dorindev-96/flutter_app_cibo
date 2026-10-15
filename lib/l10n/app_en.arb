@@ -124,66 +124,6 @@
     "@help_intro": {
         "description": "Introduction text for the help screen"
     },
-    "help_step1": "Start by entering the name of the dish",
-    "@help_step1": {
-        "description": "Step 1 instruction"
-    },
-    "help_step2": "and immediately we can enter the weight of the container",
-    "@help_step2": {
-        "description": "Step 2 instruction"
-    },
-    "help_step2_note": ", with the lid if applicable.",
-    "@help_step2_note": {
-        "description": "Note for step 2"
-    },
-    "help_step3": "At this point, if we don't have everything ready yet, we can save",
-    "@help_step3": {
-        "description": "Step 3 instruction"
-    },
-    "help_step3_note": "and continue once we have prepared the dish.",
-    "@help_step3_note": {
-        "description": "Note for step 3"
-    },
-    "help_step4": "Once everything is ready, fill the container and weigh it, with the lid if applicable, and enter its total weight",
-    "@help_step4": {
-        "description": "Step 4 instruction"
-    },
-    "help_step5": "we will see that",
-    "@help_step5": {
-        "description": "Step 5 instruction part 1"
-    },
-    "help_step5_note": "is calculated automatically and by changing",
-    "@help_step5_note": {
-        "description": "Step 5 instruction part 2"
-    },
-    "help_step5_end": "it will update accordingly.",
-    "@help_step5_end": {
-        "description": "Step 5 instruction part 3"
-    },
-    "help_step6": "At this point we can choose to enter the number of portions",
-    "@help_step6": {
-        "description": "Step 6 instruction part 1"
-    },
-    "help_step6_note": "or the weight of a single portion",
-    "@help_step6_note": {
-        "description": "Step 6 instruction part 2"
-    },
-    "help_step6_end": ", entering one will automatically update the other.",
-    "@help_step6_end": {
-        "description": "Step 6 instruction part 3"
-    },
-    "help_step7": "We can now save everything using the save button",
-    "@help_step7": {
-        "description": "Step 7 instruction"
-    },
-    "help_gnam": "When we eat our meal, instead of manually changing the values we can use the Gnam button",
-    "@help_gnam": {
-        "description": "Gnam button instruction"
-    },
-    "help_gnam_note": "which will remove one portion from the container and update all the data.",
-    "@help_gnam_note": {
-        "description": "Gnam button note"
-    },
     "help_thanks": "Thank you for downloading Cibo.",
     "@help_thanks": {
         "description": "Thank you message"
@@ -256,5 +196,163 @@
     "presetPickerEmpty": "No container presets saved yet.\nAdd them from the Containers tab.",
     "@presetPickerEmpty": {
         "description": "Message when no presets are available in the picker"
+    },
+    "settings_theme_system": "System",
+    "@settings_theme_system": {
+        "description": "Theme option that follows the system setting"
+    },
+    "settings_theme_light": "Light",
+    "@settings_theme_light": {
+        "description": "Theme option for the light theme"
+    },
+    "settings_theme_dark": "Dark",
+    "@settings_theme_dark": {
+        "description": "Theme option for the dark theme"
+    },
+    "settings_freshness_fridge": "Fridge shelf life",
+    "@settings_freshness_fridge": {
+        "description": "Label for the setting of how many days food keeps in the fridge"
+    },
+    "settings_freshness_freezer": "Freezer shelf life",
+    "@settings_freshness_freezer": {
+        "description": "Label for the setting of how many days food keeps in the freezer"
+    },
+    "settings_freshness_note": "The badge next to each dish turns orange when it should be eaten soon and red once it is past the shelf life you set.",
+    "@settings_freshness_note": {
+        "description": "Explanation of the freshness badge shown below the freshness settings"
+    },
+    "settings_freshness_days_label": "Days",
+    "@settings_freshness_days_label": {
+        "description": "Label for the number of days field in the shelf life dialog"
+    },
+    "gen_Save": "Save",
+    "@gen_Save": {
+        "description": "Save button label"
+    },
+    "freshnessDays": "{days, plural, =1{1 day} other{{days} days}}",
+    "@freshnessDays": {
+        "description": "Number of days of shelf life",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "freshnessAge": "{days, plural, =0{Today} =1{Yesterday} other{{days} days ago}}",
+    "@freshnessAge": {
+        "description": "How long ago the food was stored, shown in the freshness badge",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "freshnessFresh": "Fresh",
+    "@freshnessFresh": {
+        "description": "Freshness status: the food is fresh"
+    },
+    "freshnessExpiring": "Eat soon",
+    "@freshnessExpiring": {
+        "description": "Freshness status: the food should be eaten soon"
+    },
+    "freshnessExpired": "Expired",
+    "@freshnessExpired": {
+        "description": "Freshness status: the food is past its shelf life"
+    },
+    "containerDetailStorageLabel": "Storage",
+    "@containerDetailStorageLabel": {
+        "description": "Label for the storage (fridge or freezer) selector in the container detail page"
+    },
+    "storageFridge": "Fridge",
+    "@storageFridge": {
+        "description": "Storage option: fridge"
+    },
+    "storageFreezer": "Freezer",
+    "@storageFreezer": {
+        "description": "Storage option: freezer"
+    },
+    "containerDetailDateLabel": "Upload Date",
+    "@containerDetailDateLabel": {
+        "description": "Label for the upload date field in the container detail page"
+    },
+    "guideWelcomeTitle": "Welcome to Cibo",
+    "@guideWelcomeTitle": {
+        "description": "Title of the welcome page of the introductory guide"
+    },
+    "guideWelcomeText": "Cooking ahead? Cibo tells you how many portions you have and how many grams to take each time. All offline, on your phone.",
+    "@guideWelcomeText": {
+        "description": "Text of the welcome page of the introductory guide"
+    },
+    "guideCalcTitle": "Weigh it, Cibo does the rest",
+    "@guideCalcTitle": {
+        "description": "Title of the guide section explaining the automatic weight calculation"
+    },
+    "guideCalcText": "Tap + and weigh the container empty and then full: Cibo works out the weight of the food. Enter the portions or the weight of one portion and the other value is calculated for you.",
+    "@guideCalcText": {
+        "description": "Text of the guide section explaining the automatic weight calculation"
+    },
+    "guideGnamTitle": "Gnam!",
+    "@guideGnamTitle": {
+        "description": "Title of the guide section explaining the Gnam button"
+    },
+    "guideGnamText": "When you eat a portion, tap the cutlery: portions and weight update by themselves. Tap the dish to edit it or update its total weight.",
+    "@guideGnamText": {
+        "description": "Text of the guide section explaining the Gnam button"
+    },
+    "guideFreshTitle": "Always fresh",
+    "@guideFreshTitle": {
+        "description": "Title of the guide section explaining the freshness badge"
+    },
+    "guideFreshText": "The badge shows how many days the dish has been stored: green when it is fresh, orange when it should be eaten soon, red once it is past its shelf life. Choose fridge or freezer for each dish; you can change the shelf life in Settings.",
+    "@guideFreshText": {
+        "description": "Text of the guide section explaining the freshness badge"
+    },
+    "guideSetsTitle": "Your containers",
+    "@guideSetsTitle": {
+        "description": "Title of the guide section explaining the saved containers"
+    },
+    "guideSetsText": "Save the containers you use most, with photo and weight, in the Containers tab. When adding a dish, tap the icon in the Container Weight field so you don't have to weigh it again.",
+    "@guideSetsText": {
+        "description": "Text of the guide section explaining the saved containers"
+    },
+    "guideLabelContainer": "Container",
+    "@guideLabelContainer": {
+        "description": "Short label for the container weight in the guide calculation example"
+    },
+    "guideLabelFood": "Food",
+    "@guideLabelFood": {
+        "description": "Short label for the food weight in the guide calculation example"
+    },
+    "guideLabelTotal": "Total",
+    "@guideLabelTotal": {
+        "description": "Short label for the total weight in the guide calculation example"
+    },
+    "guideLabelPortions": "Portions",
+    "@guideLabelPortions": {
+        "description": "Short label for the number of portions in the guide calculation example"
+    },
+    "guideLabelPortion": "Portion",
+    "@guideLabelPortion": {
+        "description": "Short label for the weight of a portion in the guide calculation example"
+    },
+    "guideSampleDish": "Basmati rice",
+    "@guideSampleDish": {
+        "description": "Name of the sample dish shown in the guide"
+    },
+    "guideSampleContainer": "Blue container",
+    "@guideSampleContainer": {
+        "description": "Name of the sample container shown in the guide"
+    },
+    "guideSkip": "Skip",
+    "@guideSkip": {
+        "description": "Button to skip the introductory guide"
+    },
+    "guideNext": "Next",
+    "@guideNext": {
+        "description": "Button to go to the next page of the introductory guide"
+    },
+    "guideStart": "Get started",
+    "@guideStart": {
+        "description": "Button to close the introductory guide on its last page"
     }
 }
