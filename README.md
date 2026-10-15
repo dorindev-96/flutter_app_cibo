@@ -4,7 +4,7 @@ Tieniti in forma senza stress: calcola le porzioni, i grammi da prelevare e tien
 
 ![Flutter](https://img.shields.io/badge/Flutter-Ready-blue?logo=flutter)
 ![Piattaforme](https://img.shields.io/badge/iOS%20%26%20Android-Supportate-green)
-![Versione](https://img.shields.io/badge/Versione-1.1.0-green)
+![Versione](https://img.shields.io/badge/Versione-1.1.2-green)
 [![Codemagic build status](https://api.codemagic.io/apps/6969689ced3b3cf5c7be53ae/6969689ced3b3cf5c7be53ad/status_badge.svg)](https://codemagic.io/app/6969689ced3b3cf5c7be53ae/6969689ced3b3cf5c7be53ad/latest_build)
 ![Offline](https://img.shields.io/badge/Funziona-Offline-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -179,6 +179,18 @@ flutter run
 ---
 
 ## 🗺️ Roadmap
+- ✅ v1.1.2:
+  - Indicatore di freschezza: bollino con i giorni di conservazione (verde/arancione/rosso), scelta frigo/freezer e durate configurabili nelle impostazioni
+  - Elenco ordinato dal piatto più urgente
+  - Foto dei set salvate in modo persistente nella cartella dell'app
+  - Scelta del tema: Sistema, Chiaro o Scuro
+  - Numeri e date formattati secondo la lingua, con supporto alla virgola decimale
+  - Nuova pagina Aiuto con esempi interattivi, tradotta in tutte le lingue
+  - Guida introduttiva al primo avvio
+  - Nuova icona dell'app
+  - Unit test per cubit, bloc e servizio foto
+- ✅ v1.1.1:
+  - Fix: "Senza nome" non tradotto nel messaggio di conferma eliminazione
 - ✅ v1.1.0:
   - Nuovo stile grafico
   - Funzionalità crea set di contenitori
