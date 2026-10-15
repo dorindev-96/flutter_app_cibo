@@ -39,12 +39,20 @@ void main() {
   }
 
   /// Sends [evento] and returns the states emitted while handling it.
+  ///
+  /// Photos are copied and deleted with real file operations, which can take
+  /// any number of event loop turns, so this waits for the list to reload.
   Future<List<ElencoContenitoriScreenState>> invia(
     ElencoContenitoriScreenEvent evento,
   ) async {
     stati.clear();
+    final ricaricato = bloc.stream.firstWhere(
+      (s) =>
+          s is ElencoContenitoriScreenLoaded ||
+          s is ElencoContenitoriScreenError,
+    );
     bloc.add(evento);
-    await pumpEventQueue();
+    await ricaricato;
     return stati;
   }
 
