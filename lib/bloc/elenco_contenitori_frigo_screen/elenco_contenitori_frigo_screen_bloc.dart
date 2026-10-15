@@ -13,10 +13,11 @@ class ElencoContenitoriFrigoScreenBloc
           ElencoContenitoriFrigoScreenEvent,
           ElencoContenitoriFrigoScreenState
         > {
-  final _contenitoriRepository = ContenitoriRepository();
+  final ContenitoriRepository _contenitoriRepository;
 
-  ElencoContenitoriFrigoScreenBloc()
-    : super(ElencoContenitoriFrigoScreenInitial()) {
+  ElencoContenitoriFrigoScreenBloc({ContenitoriRepository? repository})
+    : _contenitoriRepository = repository ?? ContenitoriRepository(),
+      super(ElencoContenitoriFrigoScreenInitial()) {
     on<LoadContenitoriEvent>(_loadContenitori);
     on<AddContenitoreEvent>(_addContenitore);
     on<EditContenitoreEvent>(_editContenitore);

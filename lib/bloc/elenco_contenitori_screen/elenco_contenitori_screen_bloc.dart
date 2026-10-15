@@ -13,9 +13,11 @@ part 'elenco_contenitori_screen_state.dart';
 /// Handles loading, adding, and deleting container set presets.
 class ElencoContenitoriScreenBloc
     extends Bloc<ElencoContenitoriScreenEvent, ElencoContenitoriScreenState> {
-  final _repository = SetContenitoriRepository();
+  final SetContenitoriRepository _repository;
 
-  ElencoContenitoriScreenBloc() : super(ElencoContenitoriScreenInitial()) {
+  ElencoContenitoriScreenBloc({SetContenitoriRepository? repository})
+    : _repository = repository ?? SetContenitoriRepository(),
+      super(ElencoContenitoriScreenInitial()) {
     on<LoadSetContenitoriEvent>(_loadSetContenitori);
     on<AddSetContenitoreEvent>(_addSetContenitore);
     on<DeleteSetContenitoreEvent>(_deleteSetContenitore);

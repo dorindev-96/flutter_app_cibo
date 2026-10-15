@@ -83,6 +83,14 @@ flutter gen-l10n
 flutter run
 ```
 
+### Test
+
+```bash
+flutter test
+```
+
+I test non richiedono un dispositivo né il database: ObjectBox è sostituito da repository in memoria (`test/helpers/`).
+
 ### Build per il rilascio
 
 ```bash
@@ -216,6 +224,7 @@ Per contribuire:
 Prima di aprire una PR, assicurati di:
 - Formattare il codice: `dart format .`
 - Eseguire l'analisi: `dart analyze`
+- Eseguire i test: `flutter test`
 - Descrivi chiaramente le modifiche effettuate.
 
 ---

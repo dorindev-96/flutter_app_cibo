@@ -1,31 +1,21 @@
 import 'package:cibo/cubit/dettaglio_contenitore_cubit/dettaglio_contenitore_cubit.dart';
 import 'package:cibo/models/entities/contenitore_entity.dart';
-import 'package:cibo/repositories/contenitori_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-/// In-memory repository, so the cubit can be tested without ObjectBox.
-class _FakeContenitoriRepository implements ContenitoriRepository {
-  final contenitori = <int, ContenitoreEntity>{};
-
-  @override
-  ContenitoreEntity? get(int id) => contenitori[id];
-
-  @override
-  void put(ContenitoreEntity entity) => contenitori[entity.id] = entity;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
+import 'helpers/fake_repositories.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting());
 
   final caricato = DateTime(2026, 10, 12, 19, 30);
-  late _FakeContenitoriRepository repository;
+  late FakeContenitoriRepository repository;
+
+  /// Id of a container just added to the fridge, with every field empty.
+  const idNuovo = 2;
 
   setUp(() {
-    repository = _FakeContenitoriRepository()
+    repository = FakeContenitoriRepository()
       ..put(
         ContenitoreEntity()
           ..id = 1
@@ -36,62 +26,248 @@ void main() {
           ..pesoPorzione = 150
           ..dataCaricamento = caricato
           ..nelFreezer = true,
+      )
+      ..put(
+        ContenitoreEntity()
+          ..id = idNuovo
+          ..dataCaricamento = caricato,
       );
   });
 
-  DettaglioContenitoreCubit crea(String locale) => DettaglioContenitoreCubit(
-    contenitoreId: 1,
-    locale: locale,
-    repository: repository,
-  );
+  DettaglioContenitoreCubit crea(String locale, {int id = 1}) {
+    final cubit = DettaglioContenitoreCubit(
+      contenitoreId: id,
+      locale: locale,
+      repository: repository,
+    );
+    addTearDown(cubit.close);
+    return cubit;
+  }
 
-  test('shows the stored values formatted for the locale', () async {
-    final cubit = crea('it');
+  group('loading', () {
+    test('shows the stored values formatted for the locale', () {
+      final cubit = crea('it');
 
-    expect(cubit.containerWeightController.text, '300');
-    expect(cubit.totalWeightController.text, '1200');
-    expect(cubit.foodWeightController.text, '900');
-    expect(cubit.portionController.text, '6');
-    expect(cubit.portionWeightController.text, '150');
-    expect(cubit.dataCaricamentoController.text, '12/10/2026');
-    expect(cubit.nelFreezer, isTrue);
-    await cubit.close();
+      expect(cubit.state, isA<DettaglioContenitoreLoaded>());
+      expect(cubit.nameController.text, 'Ceci');
+      expect(cubit.containerWeightController.text, '300');
+      expect(cubit.totalWeightController.text, '1200');
+      expect(cubit.foodWeightController.text, '900');
+      expect(cubit.portionController.text, '6');
+      expect(cubit.portionWeightController.text, '150');
+      expect(cubit.dataCaricamentoController.text, '12/10/2026');
+      expect(cubit.nelFreezer, isTrue);
+    });
+
+    test('leaves the fields of a new container empty', () {
+      final cubit = crea('it', id: idNuovo);
+
+      for (final controller in [
+        cubit.nameController,
+        cubit.totalWeightController,
+        cubit.containerWeightController,
+        cubit.foodWeightController,
+        cubit.portionController,
+        cubit.portionWeightController,
+      ]) {
+        expect(controller.text, isEmpty);
+      }
+      expect(cubit.dataCaricamentoController.text, '12/10/2026');
+      expect(cubit.nelFreezer, isFalse);
+    });
+
+    test('reports a container that does not exist', () {
+      final cubit = crea('it', id: 99);
+
+      expect(cubit.state, isA<DettaglioContenitoreError>());
+    });
+
+    test('reports a database error', () {
+      repository.errore = Exception('database');
+
+      final cubit = crea('it');
+
+      expect(
+        cubit.state,
+        isA<DettaglioContenitoreError>().having(
+          (s) => s.message,
+          'message',
+          contains('database'),
+        ),
+      );
+    });
   });
 
-  test('reads decimals typed with a comma and recalculates', () async {
-    final cubit = crea('it');
+  group('calculations', () {
+    late DettaglioContenitoreCubit cubit;
 
-    cubit.totalWeightController.text = '1000,5';
+    setUp(() => cubit = crea('it', id: idNuovo));
 
-    expect(cubit.foodWeightController.text, '700,5');
-    expect(cubit.portionWeightController.text, '116,75');
-    await cubit.close();
+    test('container and total weight give the food weight', () {
+      cubit.containerWeightController.text = '300';
+      cubit.totalWeightController.text = '1200';
+
+      expect(cubit.foodWeightController.text, '900');
+    });
+
+    test('total and food weight give the container weight', () {
+      cubit.totalWeightController.text = '1200';
+      cubit.foodWeightController.text = '900';
+
+      expect(cubit.containerWeightController.text, '300');
+    });
+
+    test('food and container weight give the total weight', () {
+      cubit.foodWeightController.text = '900';
+      cubit.containerWeightController.text = '300';
+
+      expect(cubit.totalWeightController.text, '1200');
+    });
+
+    test('portions split the food weight', () {
+      cubit.foodWeightController.text = '900';
+      cubit.portionController.text = '6';
+
+      expect(cubit.portionWeightController.text, '150');
+    });
+
+    test('portion weight gives the number of portions, rounded', () {
+      cubit.foodWeightController.text = '1000';
+      cubit.portionWeightController.text = '350';
+
+      expect(cubit.portionController.text, '3');
+    });
+
+    test('portions and portion weight give the food and total weight', () {
+      cubit.containerWeightController.text = '300';
+      cubit.portionController.text = '4';
+      cubit.portionWeightController.text = '150';
+
+      expect(cubit.foodWeightController.text, '600');
+      expect(cubit.totalWeightController.text, '900');
+    });
+
+    test('the same, typing the portions last', () {
+      cubit.totalWeightController.text = '900';
+      cubit.portionWeightController.text = '150';
+      cubit.portionController.text = '4';
+
+      expect(cubit.foodWeightController.text, '600');
+      expect(cubit.containerWeightController.text, '300');
+    });
+
+    test('a new food weight updates the portion weight', () {
+      cubit.foodWeightController.text = '900';
+      cubit.portionController.text = '6';
+
+      cubit.foodWeightController.text = '600';
+
+      expect(cubit.portionWeightController.text, '100');
+    });
+
+    test('a new total weight updates food and portion weight', () {
+      cubit.containerWeightController.text = '300';
+      cubit.totalWeightController.text = '1200';
+      cubit.portionController.text = '6';
+
+      cubit.totalWeightController.text = '900';
+
+      expect(cubit.foodWeightController.text, '600');
+      expect(cubit.portionWeightController.text, '100');
+    });
+
+    test('never writes a negative weight', () {
+      cubit.containerWeightController.text = '500';
+      cubit.totalWeightController.text = '300';
+
+      expect(cubit.foodWeightController.text, isEmpty);
+    });
+
+    test('reads decimals typed with a comma or a dot', () {
+      cubit.containerWeightController.text = '300';
+      cubit.totalWeightController.text = '1000,5';
+      expect(cubit.foodWeightController.text, '700,5');
+
+      cubit.totalWeightController.text = '1000.25';
+      expect(cubit.foodWeightController.text, '700,25');
+    });
+
+    test('formats the results for the locale', () {
+      final inglese = crea('en', id: idNuovo);
+
+      cubit.foodWeightController.text = '100';
+      cubit.portionController.text = '3';
+      inglese.foodWeightController.text = '100';
+      inglese.portionController.text = '3';
+
+      expect(cubit.portionWeightController.text, '33,33');
+      expect(inglese.portionWeightController.text, '33.33');
+    });
   });
 
-  test('saves decimals, storage and date', () async {
-    final cubit = crea('it');
-    cubit.totalWeightController.text = '1000,5';
-    cubit.setNelFreezer(false);
+  group('storage and date', () {
+    test('changes where the food is stored', () {
+      final cubit = crea('it');
 
-    await cubit.saveContenitore();
+      cubit.setNelFreezer(false);
 
-    final salvato = repository.contenitori[1]!;
-    expect(salvato.pesoCibo, 700.5);
-    expect(salvato.pesoPorzione, 116.75);
-    expect(salvato.nelFreezer, isFalse);
-    expect(salvato.dataCaricamento, caricato);
-    await cubit.close();
+      expect(cubit.nelFreezer, isFalse);
+      expect(cubit.state, isA<DettaglioContenitoreModificato>());
+    });
+
+    test('changes the date, keeping the time when the day is the same', () {
+      final cubit = crea('en');
+
+      cubit.setDataCaricamento(DateTime(2026, 10, 12));
+      expect(cubit.dataCaricamento, caricato);
+
+      cubit.setDataCaricamento(DateTime(2026, 10, 10));
+      expect(cubit.dataCaricamento, DateTime(2026, 10, 10));
+      expect(cubit.dataCaricamentoController.text, '10/10/2026');
+      expect(cubit.state, isA<DettaglioContenitoreModificato>());
+    });
   });
 
-  test('changes the date, keeping the time when the day is the same', () async {
-    final cubit = crea('en');
+  group('saving', () {
+    test('saves decimals, storage and date', () async {
+      final cubit = crea('it');
+      cubit.totalWeightController.text = '1000,5';
+      cubit.setNelFreezer(false);
 
-    cubit.setDataCaricamento(DateTime(2026, 10, 12));
-    expect(cubit.dataCaricamento, caricato);
+      await cubit.saveContenitore();
 
-    cubit.setDataCaricamento(DateTime(2026, 10, 10));
-    expect(cubit.dataCaricamento, DateTime(2026, 10, 10));
-    expect(cubit.dataCaricamentoController.text, '10/10/2026');
-    await cubit.close();
+      expect(cubit.state, isA<DettaglioContenitoreSaved>());
+      final salvato = repository.contenitori[1]!;
+      expect(salvato.nome, 'Ceci');
+      expect(salvato.pesoContenitore, 300);
+      expect(salvato.pesoCibo, 700.5);
+      expect(salvato.porzioni, 6);
+      expect(salvato.pesoPorzione, 116.75);
+      expect(salvato.nelFreezer, isFalse);
+      expect(salvato.dataCaricamento, caricato);
+    });
+
+    test('saves empty fields as missing values', () async {
+      final cubit = crea('it', id: idNuovo);
+
+      await cubit.saveContenitore();
+
+      final salvato = repository.contenitori[idNuovo]!;
+      expect(salvato.nome, isNull);
+      expect(salvato.pesoContenitore, isNull);
+      expect(salvato.pesoCibo, isNull);
+      expect(salvato.porzioni, isNull);
+      expect(salvato.pesoPorzione, isNull);
+      expect(salvato.dataCaricamento, caricato);
+    });
+
+    test('reports a database error', () async {
+      final cubit = crea('it');
+      repository.errore = Exception('database');
+
+      await cubit.saveContenitore();
+
+      expect(cubit.state, isA<DettaglioContenitoreError>());
+    });
   });
 }

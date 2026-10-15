@@ -7,22 +7,18 @@ import 'package:cibo/screens/aiuto_screen.dart';
 import 'package:cibo/screens/guida_iniziale_screen.dart';
 import 'package:cibo/services/immagini_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'helpers/cartella_documenti.dart';
+
 void main() {
   setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
     // The saved containers example resolves photos through ImmaginiService.
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-          const MethodChannel('plugins.flutter.io/path_provider'),
-          (_) async => Directory.systemTemp.path,
-        );
+    simulaCartellaDocumenti(Directory.systemTemp.path);
     immaginiService = await ImmaginiService.create();
   });
 
