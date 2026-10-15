@@ -94,61 +94,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get help_intro => 'Sehen wir uns an, wie man Cibo am besten nutzt.';
 
   @override
-  String get help_step1 => 'Beginnen wir mit der Eingabe des Gerichtsnamens';
-
-  @override
-  String get help_step2 =>
-      'und sofort können wir das Gewicht des Behälters eingeben';
-
-  @override
-  String get help_step2_note => ', mit Deckel falls vorhanden.';
-
-  @override
-  String get help_step3 =>
-      'Wenn wir noch nicht alles bereit haben, können wir speichern';
-
-  @override
-  String get help_step3_note =>
-      'und fortfahren, sobald wir das Gericht zubereitet haben.';
-
-  @override
-  String get help_step4 =>
-      'Sobald alles bereit ist, füllen wir den Behälter und wiegen ihn, mit Deckel falls vorhanden, und geben sein Gesamtgewicht ein';
-
-  @override
-  String get help_step5 => 'wir werden sehen, dass';
-
-  @override
-  String get help_step5_note =>
-      'automatisch berechnet wird und bei Änderung von';
-
-  @override
-  String get help_step5_end => 'entsprechend aktualisiert wird.';
-
-  @override
-  String get help_step6 =>
-      'Jetzt können wir wählen, ob wir die Anzahl der Portionen eingeben';
-
-  @override
-  String get help_step6_note => 'oder das Gewicht einer einzelnen Portion';
-
-  @override
-  String get help_step6_end =>
-      ', die Eingabe einer aktualisiert automatisch die andere.';
-
-  @override
-  String get help_step7 =>
-      'Wir können jetzt alles mit der Speichern-Taste speichern';
-
-  @override
-  String get help_gnam =>
-      'Wenn wir essen, können wir anstatt die Werte manuell zu ändern die Gnam-Taste verwenden';
-
-  @override
-  String get help_gnam_note =>
-      'die eine Portion aus dem Behälter entfernt und alle Daten aktualisiert.';
-
-  @override
   String get help_thanks => 'Danke, dass du Cibo heruntergeladen hast.';
 
   @override
@@ -272,6 +217,67 @@ class AppLocalizationsDe extends AppLocalizations {
   String get containerDetailDateLabel => 'Uploaddatum';
 
   @override
-  String get help_freshness =>
-      'Neben dem Namen jedes Gerichts zeigt eine Markierung, seit wie vielen Tagen es aufbewahrt wird: grün, wenn es frisch ist, orange, wenn es bald gegessen werden sollte, rot, wenn die in den Einstellungen festgelegte Haltbarkeit überschritten ist – unterschiedlich für Kühlschrank und Gefrierschrank.';
+  String get guideWelcomeTitle => 'Willkommen bei Cibo';
+
+  @override
+  String get guideWelcomeText =>
+      'Kochst du vor? Cibo sagt dir, wie viele Portionen du hast und wie viele Gramm du jedes Mal entnehmen sollst. Alles offline, auf deinem Handy.';
+
+  @override
+  String get guideCalcTitle => 'Wiegen – den Rest macht Cibo';
+
+  @override
+  String get guideCalcText =>
+      'Tippe auf + und wiege den Behälter leer und dann voll: Cibo berechnet das Gewicht des Essens. Gib die Portionen oder das Gewicht einer Portion ein, der andere Wert wird automatisch berechnet.';
+
+  @override
+  String get guideGnamTitle => 'Gnam!';
+
+  @override
+  String get guideGnamText =>
+      'Wenn du eine Portion isst, tippe auf das Besteck: Portionen und Gewicht werden automatisch aktualisiert. Tippe auf das Gericht, um es zu bearbeiten oder sein Gesamtgewicht zu aktualisieren.';
+
+  @override
+  String get guideFreshTitle => 'Immer frisch';
+
+  @override
+  String get guideFreshText =>
+      'Die Markierung zeigt, seit wie vielen Tagen das Gericht aufbewahrt wird: grün, wenn es frisch ist, orange, wenn es bald gegessen werden sollte, rot, wenn die Haltbarkeit überschritten ist. Wähle für jedes Gericht Kühlschrank oder Gefrierschrank; die Haltbarkeit änderst du in den Einstellungen.';
+
+  @override
+  String get guideSetsTitle => 'Deine Behälter';
+
+  @override
+  String get guideSetsText =>
+      'Speichere die Behälter, die du am häufigsten nutzt, mit Foto und Gewicht im Tab Behälter. Wenn du ein Gericht hinzufügst, tippe auf das Symbol im Feld Behältergewicht, damit du ihn nicht erneut wiegen musst.';
+
+  @override
+  String get guideLabelContainer => 'Behälter';
+
+  @override
+  String get guideLabelFood => 'Essen';
+
+  @override
+  String get guideLabelTotal => 'Gesamt';
+
+  @override
+  String get guideLabelPortions => 'Portionen';
+
+  @override
+  String get guideLabelPortion => 'Portion';
+
+  @override
+  String get guideSampleDish => 'Basmatireis';
+
+  @override
+  String get guideSampleContainer => 'Blauer Behälter';
+
+  @override
+  String get guideSkip => 'Überspringen';
+
+  @override
+  String get guideNext => 'Weiter';
+
+  @override
+  String get guideStart => 'Los geht\'s';
 }

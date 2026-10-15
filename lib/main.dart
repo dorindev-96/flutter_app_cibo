@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/app_router.dart';
 import 'constants/app_constants.dart';
@@ -28,6 +29,9 @@ late FreschezzaCubit freschezzaCubit;
 /// Global instance of the service storing the container set photos
 late ImmaginiService immaginiService;
 
+/// Whether the introductory guide has to be shown at startup (first launch)
+late bool mostraGuidaIniziale;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -36,6 +40,8 @@ void main() async {
   freschezzaCubit = await FreschezzaCubit.create();
   immaginiService = await ImmaginiService.create();
   await immaginiService.migraPercorsiAssoluti(SetContenitoriRepository());
+  final prefs = await SharedPreferences.getInstance();
+  mostraGuidaIniziale = !(prefs.getBool(guidaVistaKey) ?? false);
 
   runApp(const MainApp());
 }

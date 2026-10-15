@@ -43,6 +43,7 @@ Quante volte hai preparato più porzioni per i prossimi giorni e poi, davanti al
 - 🎨 Tema chiaro, scuro o di sistema
 - 🌐 Localizzazione multi-lingua (Italiano, English, Español, Français, Deutsch, Svenska)
 - 🧑‍🍳 Interfaccia semplice e pensata per uso quotidiano
+- 📖 Guida introduttiva al primo avvio e pagina Aiuto sempre aggiornata
 
 ---
 

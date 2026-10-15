@@ -124,66 +124,6 @@
     "@help_intro": {
         "description": "Introduction text for the help screen"
     },
-    "help_step1": "Commençons par entrer le nom du plat",
-    "@help_step1": {
-        "description": "Step 1 instruction"
-    },
-    "help_step2": "et immédiatement nous pouvons entrer le poids du conteneur",
-    "@help_step2": {
-        "description": "Step 2 instruction"
-    },
-    "help_step2_note": ", avec le couvercle si applicable.",
-    "@help_step2_note": {
-        "description": "Note for step 2"
-    },
-    "help_step3": "À ce stade, si nous n'avons pas encore tout prêt, nous pouvons sauvegarder",
-    "@help_step3": {
-        "description": "Step 3 instruction"
-    },
-    "help_step3_note": "et continuer une fois que nous avons préparé le plat.",
-    "@help_step3_note": {
-        "description": "Note for step 3"
-    },
-    "help_step4": "Une fois que tout est prêt, remplissons le conteneur et pesons-le, avec le couvercle si applicable, et entrons son poids total",
-    "@help_step4": {
-        "description": "Step 4 instruction"
-    },
-    "help_step5": "nous verrons que",
-    "@help_step5": {
-        "description": "Step 5 instruction part 1"
-    },
-    "help_step5_note": "est calculé automatiquement et en modifiant",
-    "@help_step5_note": {
-        "description": "Step 5 instruction part 2"
-    },
-    "help_step5_end": "il sera mis à jour en conséquence.",
-    "@help_step5_end": {
-        "description": "Step 5 instruction part 3"
-    },
-    "help_step6": "À ce stade, nous pouvons choisir d'entrer le nombre de portions",
-    "@help_step6": {
-        "description": "Step 6 instruction part 1"
-    },
-    "help_step6_note": "ou le poids d'une seule portion",
-    "@help_step6_note": {
-        "description": "Step 6 instruction part 2"
-    },
-    "help_step6_end": ", en entrant l'une, l'autre se mettra à jour automatiquement.",
-    "@help_step6_end": {
-        "description": "Step 6 instruction part 3"
-    },
-    "help_step7": "Nous pouvons maintenant tout sauvegarder avec le bouton enregistrer",
-    "@help_step7": {
-        "description": "Step 7 instruction"
-    },
-    "help_gnam": "Quand nous mangeons, au lieu de modifier les valeurs manuellement, nous pouvons utiliser le bouton Gnam",
-    "@help_gnam": {
-        "description": "Gnam button instruction"
-    },
-    "help_gnam_note": "qui supprimera une portion du conteneur et mettra à jour toutes les données.",
-    "@help_gnam_note": {
-        "description": "Gnam button note"
-    },
     "help_thanks": "Merci d'avoir téléchargé Cibo.",
     "@help_thanks": {
         "description": "Thank you message"
@@ -335,8 +275,84 @@
     "@containerDetailDateLabel": {
         "description": "Label for the upload date field in the container detail page"
     },
-    "help_freshness": "À côté du nom de chaque plat, une pastille indique depuis combien de jours il est conservé : verte s'il est frais, orange s'il faut le consommer bientôt, rouge s'il a dépassé la durée définie dans les Paramètres, différente pour le réfrigérateur et le congélateur.",
-    "@help_freshness": {
-        "description": "Help text explaining the freshness badge"
+    "guideWelcomeTitle": "Bienvenue dans Cibo",
+    "@guideWelcomeTitle": {
+        "description": "Title of the welcome page of the introductory guide"
+    },
+    "guideWelcomeText": "Vous cuisinez à l'avance ? Cibo vous indique combien de portions il vous reste et combien de grammes prélever à chaque fois. Tout hors ligne, sur votre téléphone.",
+    "@guideWelcomeText": {
+        "description": "Text of the welcome page of the introductory guide"
+    },
+    "guideCalcTitle": "Pesez, Cibo fait le reste",
+    "@guideCalcTitle": {
+        "description": "Title of the guide section explaining the automatic weight calculation"
+    },
+    "guideCalcText": "Touchez + et pesez le conteneur vide puis plein : Cibo calcule le poids de la nourriture. Indiquez le nombre de portions ou le poids d'une portion, l'autre valeur se calcule toute seule.",
+    "@guideCalcText": {
+        "description": "Text of the guide section explaining the automatic weight calculation"
+    },
+    "guideGnamTitle": "Gnam !",
+    "@guideGnamTitle": {
+        "description": "Title of the guide section explaining the Gnam button"
+    },
+    "guideGnamText": "Quand vous mangez une portion, touchez les couverts : les portions et le poids se mettent à jour tout seuls. Touchez le plat pour le modifier ou mettre à jour son poids total.",
+    "@guideGnamText": {
+        "description": "Text of the guide section explaining the Gnam button"
+    },
+    "guideFreshTitle": "Toujours frais",
+    "@guideFreshTitle": {
+        "description": "Title of the guide section explaining the freshness badge"
+    },
+    "guideFreshText": "La pastille indique depuis combien de jours le plat est conservé : verte s'il est frais, orange s'il faut le manger bientôt, rouge s'il a dépassé sa durée. Choisissez réfrigérateur ou congélateur pour chaque plat ; les durées se modifient dans les Paramètres.",
+    "@guideFreshText": {
+        "description": "Text of the guide section explaining the freshness badge"
+    },
+    "guideSetsTitle": "Vos conteneurs",
+    "@guideSetsTitle": {
+        "description": "Title of the guide section explaining the saved containers"
+    },
+    "guideSetsText": "Enregistrez les conteneurs que vous utilisez le plus, avec photo et poids, dans l'onglet Conteneurs. En ajoutant un plat, touchez l'icône du champ Poids du Conteneur pour ne pas avoir à le repeser.",
+    "@guideSetsText": {
+        "description": "Text of the guide section explaining the saved containers"
+    },
+    "guideLabelContainer": "Conteneur",
+    "@guideLabelContainer": {
+        "description": "Short label for the container weight in the guide calculation example"
+    },
+    "guideLabelFood": "Nourriture",
+    "@guideLabelFood": {
+        "description": "Short label for the food weight in the guide calculation example"
+    },
+    "guideLabelTotal": "Total",
+    "@guideLabelTotal": {
+        "description": "Short label for the total weight in the guide calculation example"
+    },
+    "guideLabelPortions": "Portions",
+    "@guideLabelPortions": {
+        "description": "Short label for the number of portions in the guide calculation example"
+    },
+    "guideLabelPortion": "Portion",
+    "@guideLabelPortion": {
+        "description": "Short label for the weight of a portion in the guide calculation example"
+    },
+    "guideSampleDish": "Riz basmati",
+    "@guideSampleDish": {
+        "description": "Name of the sample dish shown in the guide"
+    },
+    "guideSampleContainer": "Conteneur bleu",
+    "@guideSampleContainer": {
+        "description": "Name of the sample container shown in the guide"
+    },
+    "guideSkip": "Passer",
+    "@guideSkip": {
+        "description": "Button to skip the introductory guide"
+    },
+    "guideNext": "Suivant",
+    "@guideNext": {
+        "description": "Button to go to the next page of the introductory guide"
+    },
+    "guideStart": "Commencer",
+    "@guideStart": {
+        "description": "Button to close the introductory guide on its last page"
     }
 }

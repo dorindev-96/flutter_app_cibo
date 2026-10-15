@@ -256,96 +256,6 @@ abstract class AppLocalizations {
   /// **'Vediamo come utilizzare al meglio Cibo.'**
   String get help_intro;
 
-  /// Step 1 instruction
-  ///
-  /// In it, this message translates to:
-  /// **'Iniziamo inserendo il nome della pietanza'**
-  String get help_step1;
-
-  /// Step 2 instruction
-  ///
-  /// In it, this message translates to:
-  /// **'e subito possiamo inserire il peso del contenitore'**
-  String get help_step2;
-
-  /// Note for step 2
-  ///
-  /// In it, this message translates to:
-  /// **', con il coperchio se previsto.'**
-  String get help_step2_note;
-
-  /// Step 3 instruction
-  ///
-  /// In it, this message translates to:
-  /// **'A questo punto se non abbiamo ancora tutto pronto possiamo salvare'**
-  String get help_step3;
-
-  /// Note for step 3
-  ///
-  /// In it, this message translates to:
-  /// **'e proseguire una volta che abbiamo preparato la pietanza.'**
-  String get help_step3_note;
-
-  /// Step 4 instruction
-  ///
-  /// In it, this message translates to:
-  /// **'Una volta che abbiamo tutto pronto, riempiamo il contenitore e lo pesiamo, con coperchio se previsto, e inseriamo il suo peso totale'**
-  String get help_step4;
-
-  /// Step 5 instruction part 1
-  ///
-  /// In it, this message translates to:
-  /// **'vedremo che'**
-  String get help_step5;
-
-  /// Step 5 instruction part 2
-  ///
-  /// In it, this message translates to:
-  /// **'si valorizza automaticamente e variandolo'**
-  String get help_step5_note;
-
-  /// Step 5 instruction part 3
-  ///
-  /// In it, this message translates to:
-  /// **'si aggiornerà di conseguenza.'**
-  String get help_step5_end;
-
-  /// Step 6 instruction part 1
-  ///
-  /// In it, this message translates to:
-  /// **'A questo punto possiamo scegliere se inserire il nr di porzioni'**
-  String get help_step6;
-
-  /// Step 6 instruction part 2
-  ///
-  /// In it, this message translates to:
-  /// **'o quant\'è il peso di una singola porzione'**
-  String get help_step6_note;
-
-  /// Step 6 instruction part 3
-  ///
-  /// In it, this message translates to:
-  /// **', inserendone una l\'altra si aggiornerà di conseguenza.'**
-  String get help_step6_end;
-
-  /// Step 7 instruction
-  ///
-  /// In it, this message translates to:
-  /// **'Possiamo ora salvare tutto usando il tasto salva'**
-  String get help_step7;
-
-  /// Gnam button instruction
-  ///
-  /// In it, this message translates to:
-  /// **'Quando consumiamo il nostro pasto, anziché modificare i valori a mano possiamo utilizzare il tasto Gnam'**
-  String get help_gnam;
-
-  /// Gnam button note
-  ///
-  /// In it, this message translates to:
-  /// **'che andrà a rimuovere una porzione dal contenitore e aggiornerà tutti i dati.'**
-  String get help_gnam_note;
-
   /// Thank you message
   ///
   /// In it, this message translates to:
@@ -550,11 +460,125 @@ abstract class AppLocalizations {
   /// **'Data Caricamento'**
   String get containerDetailDateLabel;
 
-  /// Help text explaining the freshness badge
+  /// Title of the welcome page of the introductory guide
   ///
   /// In it, this message translates to:
-  /// **'Accanto al nome di ogni pietanza un bollino indica da quanti giorni è conservata: verde se è fresca, arancione se va consumata presto, rosso se ha superato la durata impostata nelle Impostazioni, diversa per frigo e freezer.'**
-  String get help_freshness;
+  /// **'Ti diamo il benvenuto in Cibo'**
+  String get guideWelcomeTitle;
+
+  /// Text of the welcome page of the introductory guide
+  ///
+  /// In it, this message translates to:
+  /// **'Cucini in anticipo? Cibo ti dice quante porzioni hai e quanti grammi prelevare ogni volta. Tutto offline, sul tuo telefono.'**
+  String get guideWelcomeText;
+
+  /// Title of the guide section explaining the automatic weight calculation
+  ///
+  /// In it, this message translates to:
+  /// **'Pesa, al resto pensa Cibo'**
+  String get guideCalcTitle;
+
+  /// Text of the guide section explaining the automatic weight calculation
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca + e pesa il contenitore vuoto e poi pieno: Cibo calcola il peso del cibo. Inserisci le porzioni o il peso di una porzione e l\'altro valore si calcola da solo.'**
+  String get guideCalcText;
+
+  /// Title of the guide section explaining the Gnam button
+  ///
+  /// In it, this message translates to:
+  /// **'Gnam!'**
+  String get guideGnamTitle;
+
+  /// Text of the guide section explaining the Gnam button
+  ///
+  /// In it, this message translates to:
+  /// **'Quando mangi una porzione tocca le posate: porzioni e peso si aggiornano da soli. Tocca il piatto per modificarlo o aggiornare il peso totale.'**
+  String get guideGnamText;
+
+  /// Title of the guide section explaining the freshness badge
+  ///
+  /// In it, this message translates to:
+  /// **'Sempre fresco'**
+  String get guideFreshTitle;
+
+  /// Text of the guide section explaining the freshness badge
+  ///
+  /// In it, this message translates to:
+  /// **'Il bollino mostra da quanti giorni il piatto è conservato: verde se è fresco, arancione se va mangiato presto, rosso se ha superato la durata. Per ogni piatto scegli frigo o freezer; le durate si cambiano nelle Impostazioni.'**
+  String get guideFreshText;
+
+  /// Title of the guide section explaining the saved containers
+  ///
+  /// In it, this message translates to:
+  /// **'I tuoi contenitori'**
+  String get guideSetsTitle;
+
+  /// Text of the guide section explaining the saved containers
+  ///
+  /// In it, this message translates to:
+  /// **'Salva nella scheda Contenitori quelli che usi più spesso, con foto e peso. Quando aggiungi un piatto, tocca l\'icona nel campo Peso Contenitore per non doverlo ripesare.'**
+  String get guideSetsText;
+
+  /// Short label for the container weight in the guide calculation example
+  ///
+  /// In it, this message translates to:
+  /// **'Contenitore'**
+  String get guideLabelContainer;
+
+  /// Short label for the food weight in the guide calculation example
+  ///
+  /// In it, this message translates to:
+  /// **'Cibo'**
+  String get guideLabelFood;
+
+  /// Short label for the total weight in the guide calculation example
+  ///
+  /// In it, this message translates to:
+  /// **'Totale'**
+  String get guideLabelTotal;
+
+  /// Short label for the number of portions in the guide calculation example
+  ///
+  /// In it, this message translates to:
+  /// **'Porzioni'**
+  String get guideLabelPortions;
+
+  /// Short label for the weight of a portion in the guide calculation example
+  ///
+  /// In it, this message translates to:
+  /// **'Porzione'**
+  String get guideLabelPortion;
+
+  /// Name of the sample dish shown in the guide
+  ///
+  /// In it, this message translates to:
+  /// **'Riso basmati'**
+  String get guideSampleDish;
+
+  /// Name of the sample container shown in the guide
+  ///
+  /// In it, this message translates to:
+  /// **'Contenitore blu'**
+  String get guideSampleContainer;
+
+  /// Button to skip the introductory guide
+  ///
+  /// In it, this message translates to:
+  /// **'Salta'**
+  String get guideSkip;
+
+  /// Button to go to the next page of the introductory guide
+  ///
+  /// In it, this message translates to:
+  /// **'Avanti'**
+  String get guideNext;
+
+  /// Button to close the introductory guide on its last page
+  ///
+  /// In it, this message translates to:
+  /// **'Inizia'**
+  String get guideStart;
 }
 
 class _AppLocalizationsDelegate

@@ -94,58 +94,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get help_intro => 'Vediamo come utilizzare al meglio Cibo.';
 
   @override
-  String get help_step1 => 'Iniziamo inserendo il nome della pietanza';
-
-  @override
-  String get help_step2 => 'e subito possiamo inserire il peso del contenitore';
-
-  @override
-  String get help_step2_note => ', con il coperchio se previsto.';
-
-  @override
-  String get help_step3 =>
-      'A questo punto se non abbiamo ancora tutto pronto possiamo salvare';
-
-  @override
-  String get help_step3_note =>
-      'e proseguire una volta che abbiamo preparato la pietanza.';
-
-  @override
-  String get help_step4 =>
-      'Una volta che abbiamo tutto pronto, riempiamo il contenitore e lo pesiamo, con coperchio se previsto, e inseriamo il suo peso totale';
-
-  @override
-  String get help_step5 => 'vedremo che';
-
-  @override
-  String get help_step5_note => 'si valorizza automaticamente e variandolo';
-
-  @override
-  String get help_step5_end => 'si aggiornerà di conseguenza.';
-
-  @override
-  String get help_step6 =>
-      'A questo punto possiamo scegliere se inserire il nr di porzioni';
-
-  @override
-  String get help_step6_note => 'o quant\'è il peso di una singola porzione';
-
-  @override
-  String get help_step6_end =>
-      ', inserendone una l\'altra si aggiornerà di conseguenza.';
-
-  @override
-  String get help_step7 => 'Possiamo ora salvare tutto usando il tasto salva';
-
-  @override
-  String get help_gnam =>
-      'Quando consumiamo il nostro pasto, anziché modificare i valori a mano possiamo utilizzare il tasto Gnam';
-
-  @override
-  String get help_gnam_note =>
-      'che andrà a rimuovere una porzione dal contenitore e aggiornerà tutti i dati.';
-
-  @override
   String get help_thanks => 'Grazie per aver scaricato Cibo.';
 
   @override
@@ -269,6 +217,67 @@ class AppLocalizationsIt extends AppLocalizations {
   String get containerDetailDateLabel => 'Data Caricamento';
 
   @override
-  String get help_freshness =>
-      'Accanto al nome di ogni pietanza un bollino indica da quanti giorni è conservata: verde se è fresca, arancione se va consumata presto, rosso se ha superato la durata impostata nelle Impostazioni, diversa per frigo e freezer.';
+  String get guideWelcomeTitle => 'Ti diamo il benvenuto in Cibo';
+
+  @override
+  String get guideWelcomeText =>
+      'Cucini in anticipo? Cibo ti dice quante porzioni hai e quanti grammi prelevare ogni volta. Tutto offline, sul tuo telefono.';
+
+  @override
+  String get guideCalcTitle => 'Pesa, al resto pensa Cibo';
+
+  @override
+  String get guideCalcText =>
+      'Tocca + e pesa il contenitore vuoto e poi pieno: Cibo calcola il peso del cibo. Inserisci le porzioni o il peso di una porzione e l\'altro valore si calcola da solo.';
+
+  @override
+  String get guideGnamTitle => 'Gnam!';
+
+  @override
+  String get guideGnamText =>
+      'Quando mangi una porzione tocca le posate: porzioni e peso si aggiornano da soli. Tocca il piatto per modificarlo o aggiornare il peso totale.';
+
+  @override
+  String get guideFreshTitle => 'Sempre fresco';
+
+  @override
+  String get guideFreshText =>
+      'Il bollino mostra da quanti giorni il piatto è conservato: verde se è fresco, arancione se va mangiato presto, rosso se ha superato la durata. Per ogni piatto scegli frigo o freezer; le durate si cambiano nelle Impostazioni.';
+
+  @override
+  String get guideSetsTitle => 'I tuoi contenitori';
+
+  @override
+  String get guideSetsText =>
+      'Salva nella scheda Contenitori quelli che usi più spesso, con foto e peso. Quando aggiungi un piatto, tocca l\'icona nel campo Peso Contenitore per non doverlo ripesare.';
+
+  @override
+  String get guideLabelContainer => 'Contenitore';
+
+  @override
+  String get guideLabelFood => 'Cibo';
+
+  @override
+  String get guideLabelTotal => 'Totale';
+
+  @override
+  String get guideLabelPortions => 'Porzioni';
+
+  @override
+  String get guideLabelPortion => 'Porzione';
+
+  @override
+  String get guideSampleDish => 'Riso basmati';
+
+  @override
+  String get guideSampleContainer => 'Contenitore blu';
+
+  @override
+  String get guideSkip => 'Salta';
+
+  @override
+  String get guideNext => 'Avanti';
+
+  @override
+  String get guideStart => 'Inizia';
 }

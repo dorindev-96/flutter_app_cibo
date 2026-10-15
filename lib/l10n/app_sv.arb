@@ -124,66 +124,6 @@
     "@help_intro": {
         "description": "Introduction text for the help screen"
     },
-    "help_step1": "Börja med att ange namnet på maträtten",
-    "@help_step1": {
-        "description": "Step 1 instruction"
-    },
-    "help_step2": "och direkt kan vi ange vikten på behållaren",
-    "@help_step2": {
-        "description": "Step 2 instruction"
-    },
-    "help_step2_note": ", med locket om tillämpligt.",
-    "@help_step2_note": {
-        "description": "Note for step 2"
-    },
-    "help_step3": "Om vi inte har allt klart än kan vi spara",
-    "@help_step3": {
-        "description": "Step 3 instruction"
-    },
-    "help_step3_note": "och fortsätta när vi har förberett maträtten.",
-    "@help_step3_note": {
-        "description": "Note for step 3"
-    },
-    "help_step4": "När allt är klart, fyll behållaren och väg den, med locket om tillämpligt, och ange dess totalvikt",
-    "@help_step4": {
-        "description": "Step 4 instruction"
-    },
-    "help_step5": "vi kommer att se att",
-    "@help_step5": {
-        "description": "Step 5 instruction part 1"
-    },
-    "help_step5_note": "beräknas automatiskt och genom att ändra",
-    "@help_step5_note": {
-        "description": "Step 5 instruction part 2"
-    },
-    "help_step5_end": "uppdateras det därefter.",
-    "@help_step5_end": {
-        "description": "Step 5 instruction part 3"
-    },
-    "help_step6": "Nu kan vi välja att ange antalet portioner",
-    "@help_step6": {
-        "description": "Step 6 instruction part 1"
-    },
-    "help_step6_note": "eller vikten på en enskild portion",
-    "@help_step6_note": {
-        "description": "Step 6 instruction part 2"
-    },
-    "help_step6_end": ", att ange en uppdaterar automatiskt den andra.",
-    "@help_step6_end": {
-        "description": "Step 6 instruction part 3"
-    },
-    "help_step7": "Vi kan nu spara allt med sparaknappen",
-    "@help_step7": {
-        "description": "Step 7 instruction"
-    },
-    "help_gnam": "När vi äter, istället för att ändra värdena manuellt kan vi använda Gnam-knappen",
-    "@help_gnam": {
-        "description": "Gnam button instruction"
-    },
-    "help_gnam_note": "som tar bort en portion från behållaren och uppdaterar all data.",
-    "@help_gnam_note": {
-        "description": "Gnam button note"
-    },
     "help_thanks": "Tack för att du laddade ner Cibo.",
     "@help_thanks": {
         "description": "Thank you message"
@@ -335,8 +275,84 @@
     "@containerDetailDateLabel": {
         "description": "Label for the upload date field in the container detail page"
     },
-    "help_freshness": "Bredvid namnet på varje rätt visar ett märke hur många dagar den har förvarats: grönt om den är färsk, orange om den bör ätas snart, rött om den har passerat hållbarheten som ställts in under Inställningar, olika för kylskåp och frys.",
-    "@help_freshness": {
-        "description": "Help text explaining the freshness badge"
+    "guideWelcomeTitle": "Välkommen till Cibo",
+    "@guideWelcomeTitle": {
+        "description": "Title of the welcome page of the introductory guide"
+    },
+    "guideWelcomeText": "Lagar du mat i förväg? Cibo berättar hur många portioner du har och hur många gram du ska ta varje gång. Allt offline, i din telefon.",
+    "@guideWelcomeText": {
+        "description": "Text of the welcome page of the introductory guide"
+    },
+    "guideCalcTitle": "Väg, Cibo sköter resten",
+    "@guideCalcTitle": {
+        "description": "Title of the guide section explaining the automatic weight calculation"
+    },
+    "guideCalcText": "Tryck på + och väg behållaren tom och sedan full: Cibo räknar ut matens vikt. Ange antalet portioner eller vikten på en portion, så räknas det andra värdet ut automatiskt.",
+    "@guideCalcText": {
+        "description": "Text of the guide section explaining the automatic weight calculation"
+    },
+    "guideGnamTitle": "Gnam!",
+    "@guideGnamTitle": {
+        "description": "Title of the guide section explaining the Gnam button"
+    },
+    "guideGnamText": "När du äter en portion trycker du på besticken: portioner och vikt uppdateras automatiskt. Tryck på rätten för att redigera den eller uppdatera totalvikten.",
+    "@guideGnamText": {
+        "description": "Text of the guide section explaining the Gnam button"
+    },
+    "guideFreshTitle": "Alltid färskt",
+    "@guideFreshTitle": {
+        "description": "Title of the guide section explaining the freshness badge"
+    },
+    "guideFreshText": "Märket visar hur många dagar rätten har förvarats: grönt om den är färsk, orange om den bör ätas snart, rött om den har passerat hållbarheten. Välj kylskåp eller frys för varje rätt; hållbarheten ändrar du under Inställningar.",
+    "@guideFreshText": {
+        "description": "Text of the guide section explaining the freshness badge"
+    },
+    "guideSetsTitle": "Dina behållare",
+    "@guideSetsTitle": {
+        "description": "Title of the guide section explaining the saved containers"
+    },
+    "guideSetsText": "Spara de behållare du använder mest, med foto och vikt, under fliken Behållare. När du lägger till en rätt trycker du på ikonen i fältet Behållarens vikt så slipper du väga den igen.",
+    "@guideSetsText": {
+        "description": "Text of the guide section explaining the saved containers"
+    },
+    "guideLabelContainer": "Behållare",
+    "@guideLabelContainer": {
+        "description": "Short label for the container weight in the guide calculation example"
+    },
+    "guideLabelFood": "Mat",
+    "@guideLabelFood": {
+        "description": "Short label for the food weight in the guide calculation example"
+    },
+    "guideLabelTotal": "Totalt",
+    "@guideLabelTotal": {
+        "description": "Short label for the total weight in the guide calculation example"
+    },
+    "guideLabelPortions": "Portioner",
+    "@guideLabelPortions": {
+        "description": "Short label for the number of portions in the guide calculation example"
+    },
+    "guideLabelPortion": "Portion",
+    "@guideLabelPortion": {
+        "description": "Short label for the weight of a portion in the guide calculation example"
+    },
+    "guideSampleDish": "Basmatiris",
+    "@guideSampleDish": {
+        "description": "Name of the sample dish shown in the guide"
+    },
+    "guideSampleContainer": "Blå behållare",
+    "@guideSampleContainer": {
+        "description": "Name of the sample container shown in the guide"
+    },
+    "guideSkip": "Hoppa över",
+    "@guideSkip": {
+        "description": "Button to skip the introductory guide"
+    },
+    "guideNext": "Nästa",
+    "@guideNext": {
+        "description": "Button to go to the next page of the introductory guide"
+    },
+    "guideStart": "Kom igång",
+    "@guideStart": {
+        "description": "Button to close the introductory guide on its last page"
     }
 }
