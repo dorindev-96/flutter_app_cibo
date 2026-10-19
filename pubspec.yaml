@@ -45,9 +45,3 @@ objectbox:
   # output_dir:
   #   lib: custom
   #   test: other
-
-flutter_launcher_icons:
-  ios: true
-  image_path: "assets/App_Icons/appicon.png"
-  remove_alpha_ios: true
-
