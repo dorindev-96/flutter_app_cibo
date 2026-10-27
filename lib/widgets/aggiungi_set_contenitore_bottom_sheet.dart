@@ -228,6 +228,8 @@ class _AggiungiSetContenitoreBottomSheetState
     final nome = _nameController.text.trim();
     final peso = parseDecimale(_weightController.text) ?? 0;
 
+    if (nome.isEmpty || peso <= 0) return;
+
     widget.onSave(nome, _imagePath, peso);
     Navigator.of(context).pop();
   }
