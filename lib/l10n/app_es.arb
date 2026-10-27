@@ -160,6 +160,14 @@
     "@containerSetsWeightLabel": {
         "description": "Label for the container set weight field"
     },
+    "containerSetsNameRequired": "Introduce un nombre",
+    "@containerSetsNameRequired": {
+        "description": "Error shown when the container set name is empty"
+    },
+    "containerSetsWeightInvalid": "Introduce un peso mayor que 0",
+    "@containerSetsWeightInvalid": {
+        "description": "Error shown when the container set weight is missing or not greater than 0"
+    },
     "containerSetsImageLabel": "Imagen",
     "@containerSetsImageLabel": {
         "description": "Label for the container set image field"
