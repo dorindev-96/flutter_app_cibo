@@ -50,22 +50,27 @@ class _InputDettaglioContenitoreWidgetState
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.label,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+          // The label is read by screen readers as part of the field.
+          ExcludeSemantics(
+            child: Text(
+              widget.label,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+              ),
             ),
           ),
           SizedBox(height: 8.h),
-          TextField(
-            key: widget.key,
-            controller: widget.controller,
-            keyboardType: widget.keyboardType,
-            inputFormatters: widget.inputFormatters,
-            readOnly: widget.readOnly,
-            onTap: widget.onTap,
-            decoration: InputDecoration(suffixIcon: widget.suffixIcon),
+          Semantics(
+            label: widget.label,
+            child: TextField(
+              controller: widget.controller,
+              keyboardType: widget.keyboardType,
+              inputFormatters: widget.inputFormatters,
+              readOnly: widget.readOnly,
+              onTap: widget.onTap,
+              decoration: InputDecoration(suffixIcon: widget.suffixIcon),
+            ),
           ),
         ],
       ),

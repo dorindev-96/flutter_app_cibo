@@ -19,6 +19,12 @@ void main() {
     expect(calcola(giorniFa: 4, durata: 3).stato, StatoFreschezza.scaduto);
   });
 
+  test('1-day shelf life: fresh on the day it is stored', () {
+    expect(calcola(giorniFa: 0, durata: 1).stato, StatoFreschezza.fresco);
+    expect(calcola(giorniFa: 1, durata: 1).stato, StatoFreschezza.inScadenza);
+    expect(calcola(giorniFa: 2, durata: 1).stato, StatoFreschezza.scaduto);
+  });
+
   test('freezer (90 days): to eat soon in the last quarter', () {
     expect(calcola(giorniFa: 66, durata: 90).stato, StatoFreschezza.fresco);
     expect(calcola(giorniFa: 67, durata: 90).stato, StatoFreschezza.inScadenza);

@@ -30,7 +30,8 @@ class Freschezza {
   /// The food is [StatoFreschezza.inScadenza] during the last quarter of its
   /// shelf life, and at least on its last day: e.g. on days 2 and 3 when it
   /// keeps 3 days in the fridge, or in the last ~3 weeks out of 90 days in
-  /// the freezer.
+  /// the freezer. It is never to eat soon on the day it is stored, unless it
+  /// keeps less than a day.
   factory Freschezza.calcola({
     required DateTime dataCaricamento,
     required int durataGiorni,
@@ -40,7 +41,8 @@ class Freschezza {
     final giorniRimanenti = durataGiorni - giorni;
     final stato = giorniRimanenti < 0
         ? StatoFreschezza.scaduto
-        : giorniRimanenti <= (durataGiorni / 4).ceil()
+        : giorniRimanenti <=
+              min((durataGiorni / 4).ceil(), max(0, durataGiorni - 1))
         ? StatoFreschezza.inScadenza
         : StatoFreschezza.fresco;
 

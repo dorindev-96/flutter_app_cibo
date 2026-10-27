@@ -303,7 +303,10 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
     try {
       emit(DettaglioContenitoreLoading());
 
-      final contenitore = _repository.get(contenitoreId);
+      // A new container (id 0) is stored only when saved.
+      final contenitore = contenitoreId == 0
+          ? (ContenitoreEntity()..dataCaricamento = dataCaricamento)
+          : _repository.get(contenitoreId);
 
       if (contenitore != null) {
         // Popola i controller con i dati esistenti
@@ -358,21 +361,7 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
 
   @override
   Future<void> close() {
-    totalWeightController.removeListener(
-      () => _onFieldChanged(_FieldType.totalWeight),
-    );
-    containerWeightController.removeListener(
-      () => _onFieldChanged(_FieldType.containerWeight),
-    );
-    foodWeightController.removeListener(
-      () => _onFieldChanged(_FieldType.foodWeight),
-    );
-    portionController.removeListener(
-      () => _onFieldChanged(_FieldType.portions),
-    );
-    portionWeightController.removeListener(
-      () => _onFieldChanged(_FieldType.portionWeight),
-    );
+    // Disposing the controllers also drops their listeners.
     nameController.dispose();
     totalWeightController.dispose();
     containerWeightController.dispose();

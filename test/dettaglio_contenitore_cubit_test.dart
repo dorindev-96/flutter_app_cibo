@@ -1,5 +1,6 @@
 import 'package:cibo/cubit/dettaglio_contenitore_cubit/dettaglio_contenitore_cubit.dart';
 import 'package:cibo/models/entities/contenitore_entity.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -73,6 +74,18 @@ void main() {
         expect(controller.text, isEmpty);
       }
       expect(cubit.dataCaricamentoController.text, '12/10/2026');
+      expect(cubit.nelFreezer, isFalse);
+    });
+
+    test('starts a container not stored yet as stored today', () {
+      final cubit = crea('it', id: 0);
+
+      expect(cubit.state, isA<DettaglioContenitoreLoaded>());
+      expect(cubit.nameController.text, isEmpty);
+      expect(
+        DateUtils.isSameDay(cubit.dataCaricamento, DateTime.now()),
+        isTrue,
+      );
       expect(cubit.nelFreezer, isFalse);
     });
 
@@ -259,6 +272,18 @@ void main() {
       expect(salvato.porzioni, isNull);
       expect(salvato.pesoPorzione, isNull);
       expect(salvato.dataCaricamento, caricato);
+    });
+
+    test('stores a new container only when saved', () async {
+      final cubit = crea('it', id: 0);
+      cubit.nameController.text = 'Pasta';
+      expect(repository.contenitori.keys, [1, idNuovo]);
+
+      await cubit.saveContenitore();
+
+      final salvato = repository.contenitori.values.last;
+      expect(salvato.id, isNot(anyOf(0, 1, idNuovo)));
+      expect(salvato.nome, 'Pasta');
     });
 
     test('reports a database error', () async {

@@ -200,12 +200,15 @@ class DettaglioContenitoreFrigoScreen extends StatelessWidget {
     DettaglioContenitoreCubit cubit,
   ) async {
     final now = DateTime.now();
+    final iniziale = cubit.dataCaricamento.isAfter(now)
+        ? now
+        : cubit.dataCaricamento;
+    final primaData = DateTime(2000);
     final data = await showDatePicker(
       context: context,
-      initialDate: cubit.dataCaricamento.isAfter(now)
-          ? now
-          : cubit.dataCaricamento,
-      firstDate: DateTime(2000),
+      initialDate: iniziale,
+      // The picker requires the initial date not to be before the first one.
+      firstDate: iniziale.isBefore(primaData) ? iniziale : primaData,
       lastDate: now,
     );
     if (data != null) cubit.setDataCaricamento(data);

@@ -40,7 +40,7 @@ void main() {
   test('applies the chosen theme and keeps it at the next start', () async {
     final cubit = await ThemeCubit.create();
 
-    cubit.setThemeMode(ThemeMode.light);
+    await cubit.setThemeMode(ThemeMode.light);
 
     expect(cubit.selectedMode, ThemeMode.light);
     expect(

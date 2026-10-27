@@ -62,10 +62,16 @@ final appRouter = GoRouter(
               routes: [
                 GoRoute(
                   path: 'dettaglio-contenitore-frigo/:idContenitore',
+                  // A deep link with an invalid id opens the fridge.
+                  redirect: (context, state) =>
+                      int.tryParse(state.pathParameters['idContenitore']!) ==
+                          null
+                      ? '/'
+                      : null,
                   builder: (context, state) {
-                    final int idContenitore = int.tryParse(
+                    final int idContenitore = int.parse(
                       state.pathParameters['idContenitore']!,
-                    )!;
+                    );
                     final bool isNew =
                         state.uri.queryParameters['isNew'] == 'true';
                     return DettaglioContenitoreFrigoScreen(

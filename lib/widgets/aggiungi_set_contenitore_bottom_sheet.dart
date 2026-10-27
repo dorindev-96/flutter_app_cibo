@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../l10n/app_localizations.dart';
+import '../services/immagini_service.dart';
 import '../utils/formato.dart';
 import '../widgets/input_dettaglio_contenitore_widget.dart';
 
@@ -32,8 +33,14 @@ class _AggiungiSetContenitoreBottomSheetState
   final _imagePicker = ImagePicker();
   String _imagePath = '';
 
+  /// Whether the picked photo was handed over to [widget.onSave], which
+  /// becomes responsible for its temporary file.
+  bool _salvato = false;
+
   @override
   void dispose() {
+    // A photo picked but not saved would stay in the temporary folder.
+    if (!_salvato) ImmaginiService.eliminaTemporanea(_imagePath);
     _nameController.dispose();
     _weightController.dispose();
     super.dispose();
@@ -211,10 +218,18 @@ class _AggiungiSetContenitoreBottomSheetState
         maxHeight: 1024,
         imageQuality: 85,
       );
-      if (pickedFile != null) {
-        setState(() {
-          _imagePath = pickedFile.path;
-        });
+      if (pickedFile == null) return;
+      if (!mounted) {
+        // The sheet was closed while picking: nobody will use the photo.
+        await ImmaginiService.eliminaTemporanea(pickedFile.path);
+        return;
+      }
+      final precedente = _imagePath;
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+      if (precedente != pickedFile.path) {
+        await ImmaginiService.eliminaTemporanea(precedente);
       }
     } catch (e) {
       // Permission denied or other error — silently handled.
@@ -228,6 +243,7 @@ class _AggiungiSetContenitoreBottomSheetState
     final nome = _nameController.text.trim();
     final peso = parseDecimale(_weightController.text) ?? 0;
 
+    _salvato = true;
     widget.onSave(nome, _imagePath, peso);
     Navigator.of(context).pop();
   }

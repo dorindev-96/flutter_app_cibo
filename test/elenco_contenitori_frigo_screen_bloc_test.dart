@@ -1,6 +1,5 @@
 import 'package:cibo/bloc/elenco_contenitori_frigo_screen/elenco_contenitori_frigo_screen_bloc.dart';
 import 'package:cibo/models/entities/contenitore_entity.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helpers/fake_repositories.dart';
@@ -80,19 +79,17 @@ void main() {
     ]);
   });
 
-  test('adds an empty container stored today and opens it', () async {
+  test('opens a new container without storing it', () async {
     await creaBloc();
 
     final emessi = await invia(AddContenitoreEvent());
 
-    final nuovo = repository.contenitori.values.single;
     expect(emessi, [
       isA<ElencoContenitoriFrigoScreenEdit>()
-          .having((s) => s.id, 'id', nuovo.id)
+          .having((s) => s.id, 'id', 0)
           .having((s) => s.isNew, 'isNew', isTrue),
     ]);
-    expect(DateUtils.isSameDay(nuovo.dataCaricamento, DateTime.now()), isTrue);
-    expect(nuovo.nelFreezer, isFalse);
+    expect(repository.contenitori, isEmpty);
   });
 
   test('opens an existing container', () async {
@@ -129,6 +126,26 @@ void main() {
       expect(riso.pesoCibo, 360);
       expect(riso.pesoPorzione, 180);
       expect(emessi.last, caricato([riso]));
+    });
+
+    test('splits the food evenly when the portion weight is unknown', () async {
+      final riso = aggiungiRiso()..pesoPorzione = null;
+      await creaBloc();
+
+      await invia(GnamPorzioneEvent(id: riso.id));
+
+      expect(riso.porzioni, 2);
+      expect(riso.pesoCibo, 360);
+    });
+
+    test('never leaves a negative food weight', () async {
+      final riso = aggiungiRiso()..pesoCibo = 100;
+      await creaBloc();
+
+      await invia(GnamPorzioneEvent(id: riso.id));
+
+      expect(riso.porzioni, 2);
+      expect(riso.pesoCibo, 0);
     });
 
     test('removes the container with the last portion', () async {
