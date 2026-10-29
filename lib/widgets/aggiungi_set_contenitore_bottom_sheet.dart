@@ -29,6 +29,8 @@ class _AggiungiSetContenitoreBottomSheetState
     extends State<AggiungiSetContenitoreBottomSheet> {
   final _nameController = TextEditingController();
   final _weightController = TextEditingController();
+  String? _nameError;
+  String? _weightError;
   final _imagePicker = ImagePicker();
   String _imagePath = '';
 
@@ -82,12 +84,14 @@ class _AggiungiSetContenitoreBottomSheetState
             InputDettaglioContenitoreWidget(
               label: appLoc.containerSetsNameLabel,
               controller: _nameController,
+              errorText: _nameError,
             ),
 
             // Weight field
             InputDettaglioContenitoreWidget(
               label: appLoc.containerSetsWeightLabel,
               controller: _weightController,
+              errorText: _weightError,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
@@ -227,6 +231,14 @@ class _AggiungiSetContenitoreBottomSheetState
   void _onSave() {
     final nome = _nameController.text.trim();
     final peso = parseDecimale(_weightController.text) ?? 0;
+
+    final appLoc = AppLocalizations.of(context)!;
+
+    setState(() {
+      _nameError = nome.isEmpty ? appLoc.containerSetsNameRequired : null;
+      _weightError = peso <= 0 ? appLoc.containerSetsWeightInvalid : null;
+    });
+    if (_nameError != null || _weightError != null) return;
 
     widget.onSave(nome, _imagePath, peso);
     Navigator.of(context).pop();

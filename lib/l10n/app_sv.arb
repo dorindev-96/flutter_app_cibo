@@ -160,6 +160,14 @@
     "@containerSetsWeightLabel": {
         "description": "Label for the container set weight field"
     },
+    "containerSetsNameRequired": "Ange ett namn",
+    "@containerSetsNameRequired": {
+        "description": "Error shown when the container set name is empty"
+    },
+    "containerSetsWeightInvalid": "Ange en vikt större än 0",
+    "@containerSetsWeightInvalid": {
+        "description": "Error shown when the container set weight is missing or not greater than 0"
+    },
     "containerSetsImageLabel": "Bild",
     "@containerSetsImageLabel": {
         "description": "Label for the container set image field"

@@ -16,6 +16,7 @@ class InputDettaglioContenitoreWidget extends StatefulWidget {
     this.suffixIcon,
     this.readOnly = false,
     this.onTap,
+    this.errorText,
   });
 
   final String label;
@@ -33,6 +34,9 @@ class InputDettaglioContenitoreWidget extends StatefulWidget {
 
   /// Optional callback invoked when the field is tapped.
   final VoidCallback? onTap;
+
+  /// Optional error message shown below the text field.
+  final String? errorText;
 
   @override
   State<InputDettaglioContenitoreWidget> createState() =>
@@ -65,7 +69,10 @@ class _InputDettaglioContenitoreWidgetState
             inputFormatters: widget.inputFormatters,
             readOnly: widget.readOnly,
             onTap: widget.onTap,
-            decoration: InputDecoration(suffixIcon: widget.suffixIcon),
+            decoration: InputDecoration(
+              suffixIcon: widget.suffixIcon,
+              errorText: widget.errorText,
+            ),
           ),
         ],
       ),

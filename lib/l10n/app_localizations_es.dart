@@ -121,6 +121,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get containerSetsWeightLabel => 'Peso (g)';
 
   @override
+  String get containerSetsNameRequired => 'Introduce un nombre';
+
+  @override
+  String get containerSetsWeightInvalid => 'Introduce un peso mayor que 0';
+
+  @override
   String get containerSetsImageLabel => 'Imagen';
 
   @override
