@@ -315,6 +315,13 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
             contenitore.pesoContenitore,
           );
           foodWeightController.text = _formatNullable(contenitore.pesoCibo);
+          // Il peso totale non è salvato: lo deriviamo da contenitore + cibo
+          final pesoContenitore = contenitore.pesoContenitore;
+          final pesoCibo = contenitore.pesoCibo;
+          totalWeightController.text =
+              pesoContenitore != null && pesoCibo != null
+              ? _formatDouble(pesoContenitore + pesoCibo)
+              : '';
           portionController.text = contenitore.porzioni?.toString() ?? '';
           portionWeightController.text = _formatNullable(
             contenitore.pesoPorzione,
