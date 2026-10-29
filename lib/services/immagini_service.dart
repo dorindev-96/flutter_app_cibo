@@ -63,6 +63,19 @@ class ImmaginiService {
     if (await file.exists()) await file.delete();
   }
 
+  /// Deletes a temporary photo left by image_picker, outside the app storage.
+  ///
+  /// Errors are ignored: the OS clears that folder anyway.
+  static Future<void> eliminaTemporanea(String percorso) async {
+    if (percorso.isEmpty) return;
+    try {
+      final file = File(percorso);
+      if (await file.exists()) await file.delete();
+    } catch (e) {
+      debugPrint('Temporary image delete error: $e');
+    }
+  }
+
   /// Moves the photos saved by older versions (absolute paths into the
   /// image_picker cache) into the app storage.
   ///
@@ -76,7 +89,8 @@ class ImmaginiService {
       try {
         set.pathImmagine = await salva(set.pathImmagine);
         repository.put(set);
-      } on FileSystemException catch (e) {
+      } catch (e) {
+        // Never stop the app from starting because of a photo.
         debugPrint('Image migration error: $e');
       }
     }

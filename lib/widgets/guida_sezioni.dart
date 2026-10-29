@@ -200,7 +200,7 @@ class _EsempioGnam extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLoc = AppLocalizations.of(context)!;
     final oggi = DateTime.now();
-    final ieri = oggi.subtract(const Duration(days: 1));
+    final ieri = DateTime(oggi.year, oggi.month, oggi.day - 1);
 
     return IgnorePointer(
       child: ContenitoreFrigoWidget(
@@ -238,7 +238,11 @@ class _EsempioFreschezza extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: FreschezzaBadge(
               freschezza: Freschezza.calcola(
-                dataCaricamento: oggi.subtract(Duration(days: giorniFa)),
+                dataCaricamento: DateTime(
+                  oggi.year,
+                  oggi.month,
+                  oggi.day - giorniFa,
+                ),
                 durataGiorni: 3,
                 oggi: oggi,
               ),

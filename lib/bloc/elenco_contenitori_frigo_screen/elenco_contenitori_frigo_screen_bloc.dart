@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -43,19 +45,13 @@ class ElencoContenitoriFrigoScreenBloc
     }
   }
 
+  /// Opens the editor for a new container, which is stored only when the
+  /// user saves it (id 0 means "not stored yet", as in ObjectBox).
   Future<void> _addContenitore(
     AddContenitoreEvent event,
     Emitter<ElencoContenitoriFrigoScreenState> emit,
   ) async {
-    try {
-      final newContenitore = ContenitoreEntity();
-      newContenitore.dataCaricamento = DateTime.now();
-
-      final newId = _contenitoriRepository.add(newContenitore);
-      emit(ElencoContenitoriFrigoScreenEdit(id: newId, isNew: true));
-    } catch (e) {
-      emit(ElencoContenitoriFrigoScreenError(e.toString()));
-    }
+    emit(ElencoContenitoriFrigoScreenEdit(id: 0, isNew: true));
   }
 
   Future<void> _editContenitore(
@@ -95,9 +91,14 @@ class ElencoContenitoriFrigoScreenBloc
           _contenitoriRepository.delete(event.id);
         } else {
           // Altrimenti aggiorna i valori sottraendo il peso di una porzione
+          // When the portion weight is unknown, the food is split evenly.
+          final pesoCibo = contenitore.pesoCibo;
+          if (pesoCibo != null) {
+            final pesoPorzione =
+                contenitore.pesoPorzione ?? pesoCibo / contenitore.porzioni!;
+            contenitore.pesoCibo = max(0.0, pesoCibo - pesoPorzione);
+          }
           contenitore.porzioni = nuovePorzioni;
-          final pesoPorzione = contenitore.pesoPorzione ?? 0;
-          contenitore.pesoCibo = (contenitore.pesoCibo ?? 0) - pesoPorzione;
           _contenitoriRepository.put(contenitore);
         }
       }

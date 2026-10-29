@@ -23,6 +23,9 @@ class _GuidaInizialeScreenState extends State<GuidaInizialeScreen> {
   final _pageController = PageController();
   int _pagina = 0;
 
+  /// Set once the guide is being closed, so a double tap closes it once.
+  bool _completata = false;
+
   /// Welcome page plus one page for each section of the guide
   static final _numeroPagine = 1 + SezioneGuida.values.length;
 
@@ -42,6 +45,8 @@ class _GuidaInizialeScreenState extends State<GuidaInizialeScreen> {
   }
 
   Future<void> _completa() async {
+    if (_completata) return;
+    _completata = true;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(guidaVistaKey, true);
     if (!mounted) return;

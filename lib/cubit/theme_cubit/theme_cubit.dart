@@ -34,12 +34,12 @@ class ThemeCubit extends Cubit<ThemeState> {
   ///
   /// Parameters:
   ///   - [mode]: The theme mode to set
-  void setThemeMode(ThemeMode mode) {
-    _saveThemeMode(mode);
+  Future<void> setThemeMode(ThemeMode mode) async {
     emit(ThemeReady(mode));
+    await _saveThemeMode(mode);
   }
 
-  void _saveThemeMode(ThemeMode mode) async {
+  Future<void> _saveThemeMode(ThemeMode mode) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(themeModeKey, mode.index);
   }
