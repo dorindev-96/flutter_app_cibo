@@ -121,6 +121,12 @@ class AppLocalizationsSv extends AppLocalizations {
   String get containerSetsWeightLabel => 'Vikt (g)';
 
   @override
+  String get containerSetsNameRequired => 'Ange ett namn';
+
+  @override
+  String get containerSetsWeightInvalid => 'Ange en vikt större än 0';
+
+  @override
   String get containerSetsImageLabel => 'Bild';
 
   @override

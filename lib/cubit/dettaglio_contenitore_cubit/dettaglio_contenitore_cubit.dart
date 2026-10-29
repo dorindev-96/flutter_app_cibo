@@ -309,16 +309,29 @@ class DettaglioContenitoreCubit extends Cubit<DettaglioContenitoreState> {
           : _repository.get(contenitoreId);
 
       if (contenitore != null) {
-        // Popola i controller con i dati esistenti
-        nameController.text = contenitore.nome ?? '';
-        containerWeightController.text = _formatNullable(
-          contenitore.pesoContenitore,
-        );
-        foodWeightController.text = _formatNullable(contenitore.pesoCibo);
-        portionController.text = contenitore.porzioni?.toString() ?? '';
-        portionWeightController.text = _formatNullable(
-          contenitore.pesoPorzione,
-        );
+        // Popola i controller con i dati esistenti senza far scattare
+        // i ricalcoli dei listener, che altererebbero i valori salvati
+        _isUpdating = true;
+        try {
+          nameController.text = contenitore.nome ?? '';
+          containerWeightController.text = _formatNullable(
+            contenitore.pesoContenitore,
+          );
+          foodWeightController.text = _formatNullable(contenitore.pesoCibo);
+          // Il peso totale non è salvato: lo deriviamo da contenitore + cibo
+          final pesoContenitore = contenitore.pesoContenitore;
+          final pesoCibo = contenitore.pesoCibo;
+          totalWeightController.text =
+              pesoContenitore != null && pesoCibo != null
+              ? _formatDouble(pesoContenitore + pesoCibo)
+              : '';
+          portionController.text = contenitore.porzioni?.toString() ?? '';
+          portionWeightController.text = _formatNullable(
+            contenitore.pesoPorzione,
+          );
+        } finally {
+          _isUpdating = false;
+        }
         nelFreezer = contenitore.nelFreezer;
         dataCaricamento = contenitore.dataCaricamento ?? dataCaricamento;
         dataCaricamentoController.text = formattaData(dataCaricamento, locale);

@@ -310,6 +310,18 @@ abstract class AppLocalizations {
   /// **'Peso (g)'**
   String get containerSetsWeightLabel;
 
+  /// Error shown when the container set name is empty
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci un nome'**
+  String get containerSetsNameRequired;
+
+  /// Error shown when the container set weight is missing or not greater than 0
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci un peso maggiore di 0'**
+  String get containerSetsWeightInvalid;
+
   /// Label for the container set image field
   ///
   /// In it, this message translates to:
